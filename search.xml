@@ -4,16 +4,68 @@
   
     
     <entry>
-      <title>Hello Hexo</title>
-      <link href="/2019/06/17/hello-world/"/>
-      <url>/2019/06/17/hello-world/</url>
+      <title>hexo&#39;s theme next</title>
+      <link href="/2019/07/28/hexo-theme-next/"/>
+      <url>/2019/07/28/hexo-theme-next/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server/ hexo s</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate/ hexo g</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy/ hexo d</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p><h2 id="主题–Next"><a href="#主题–Next" class="headerlink" title="主题–Next"></a>主题–Next</h2><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">使用技巧</a></p>]]></content>
+        <content type="html"><![CDATA[<p>本博客采用hexo的Next主题，也是大部分hexo博客采用的主题之一。本文主要列举一些使用小技巧，更多使用说明可以参考<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next主题官网</a></p><a id="more"></a><h2 id="编辑功能"><a href="#编辑功能" class="headerlink" title="编辑功能"></a>编辑功能</h2><h3 id="增加“阅读全文”功能"><a href="#增加“阅读全文”功能" class="headerlink" title="增加“阅读全文”功能"></a>增加“阅读全文”功能</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">截断处加入如下：</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure><h3 id="添加标签、分类"><a href="#添加标签、分类" class="headerlink" title="添加标签、分类"></a>添加标签、分类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">  - 标签1</span><br><span class="line">  - 标签2</span><br><span class="line"></span><br><span class="line">categories:</span><br><span class="line">  - 分类</span><br></pre></td></tr></table></figure><h2 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h2><h3 id="留言插件-gitTalk"><a href="#留言插件-gitTalk" class="headerlink" title="留言插件 gitTalk"></a>留言插件 gitTalk</h3>]]></content>
       
       
       <categories>
           
-          <category> 随笔 </category>
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>基于scrapy的爬虫(1)</title>
+      <link href="/2019/07/28/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB-1/"/>
+      <url>/2019/07/28/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB-1/</url>
+      
+        <content type="html"><![CDATA[<p>之前写过简单爬虫，主要用了BeautifulSoup4、request等模块。现在开始学习爬虫框架scrapy，作为记录使用，有错误欢迎反馈。</p><p>准备工作</p><p>基于python3开发<br>编辑器：pycharm (大家都在用)<br>功能库：anaconda(各种包，解决依赖的问题)</p><p>关于pycharm、anaconda的安装配置，网上教程比较多，这里不说了。所以这里从安装scrapy开始</p><a id="more"></a><h2 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h2><p>因为有anaconda，我们依赖各种包现在都很方便</p><h5 id="查看是否已经安装scrapy"><a href="#查看是否已经安装scrapy" class="headerlink" title="查看是否已经安装scrapy"></a>查看是否已经安装scrapy</h5><pre><code class="bash">conda list scrapy</code></pre><h5 id="查询conda支持的scrapy版本"><a href="#查询conda支持的scrapy版本" class="headerlink" title="查询conda支持的scrapy版本"></a>查询conda支持的scrapy版本</h5><pre><code class="bash">conda search scrapy</code></pre><h5 id="执行安装"><a href="#执行安装" class="headerlink" title="执行安装"></a>执行安装</h5><pre><code class="bash">conda install scrapy </code></pre><h2 id="创建一个scrapy项目"><a href="#创建一个scrapy项目" class="headerlink" title="创建一个scrapy项目"></a>创建一个scrapy项目</h2><p>在pycharm的Terminal,进入你要放置项目的地方，然后执行如下命令</p><pre><code class="bash"><span class="comment">#创建爬虫项目工程</span>scrapy startproject tencent_viedo</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 爬虫 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> scrapy </tag>
+            
+            <tag> python3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello Hexo</title>
+      <link href="/2019/06/17/hello-hexo/"/>
+      <url>/2019/06/17/hello-hexo/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建一篇文章"><a href="#创建一篇文章" class="headerlink" title="创建一篇文章"></a>创建一篇文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate 或者 hexo g</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="本地运行测试"><a href="#本地运行测试" class="headerlink" title="本地运行测试"></a>本地运行测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server 或者 hexo s</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="发布到远程服务器"><a href="#发布到远程服务器" class="headerlink" title="发布到远程服务器"></a>发布到远程服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy 或者 hexo d</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p><h3 id="清除本地缓存"><a href="#清除本地缓存" class="headerlink" title="清除本地缓存"></a>清除本地缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
           
       </categories>
       
