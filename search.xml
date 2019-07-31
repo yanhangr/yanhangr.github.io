@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>基于scrapy的爬虫2--第一个小爬虫</title>
+      <link href="/2019/07/31/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB2-%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/"/>
+      <url>/2019/07/31/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB2-%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/</url>
+      
+        <content type="html"><![CDATA[<p>先放这里，明天继续写！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 爬虫 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> scrapy </tag>
+            
+            <tag> python3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hexo&#39;s theme next</title>
       <link href="/2019/07/28/hexo-theme-next/"/>
       <url>/2019/07/28/hexo-theme-next/</url>
