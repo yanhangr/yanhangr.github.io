@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="es,搜索,">
+  <meta name="keywords" content="docker,elasticsearch,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="拉取镜像默认拉取最新的稳定版本，我这里指定5.2.0版本的ES集群 1$ docker pull elasticsearch:5.2.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping设置">
-<meta name="keywords" content="es,搜索">
+<meta name="description" content="拉取镜像默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群 1$ docker pull elasticsearch:7.12.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping">
+<meta name="keywords" content="docker,elasticsearch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker安装ES5.2集群">
-<meta property="og:url" content="http://yoursite.com/2020/08/09/docker安装ES5-2集群/index.html">
+<meta property="og:title" content="使用docker安装elasticsearch集群">
+<meta property="og:url" content="http://yoursite.com/2020/08/09/使用docker安装elasticsearch集群/index.html">
 <meta property="og:site_name" content="yanhangr">
-<meta property="og:description" content="拉取镜像默认拉取最新的稳定版本，我这里指定5.2.0版本的ES集群 1$ docker pull elasticsearch:5.2.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping设置">
+<meta property="og:description" content="拉取镜像默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群 1$ docker pull elasticsearch:7.12.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-10T14:05:30.205Z">
+<meta property="og:updated_time" content="2021-07-11T07:20:04.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker安装ES5.2集群">
-<meta name="twitter:description" content="拉取镜像默认拉取最新的稳定版本，我这里指定5.2.0版本的ES集群 1$ docker pull elasticsearch:5.2.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping设置">
+<meta name="twitter:title" content="使用docker安装elasticsearch集群">
+<meta name="twitter:description" content="拉取镜像默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群 1$ docker pull elasticsearch:7.12.0  虚机配置设置vm_max_map_count123$ vim /etc/sysctl.conf #编辑sysctl.conf$ vm.max_map_count=262144 #加入配置$ sysctl -p #启用配置  disable swapping">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/08/09/docker安装ES5-2集群/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/09/使用docker安装elasticsearch集群/">
 
 
 
 
 
-  <title>docker安装ES5.2集群 | yanhangr</title>
+  <title>使用docker安装elasticsearch集群 | yanhangr</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/09/docker安装ES5-2集群/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/09/使用docker安装elasticsearch集群/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yanhangr">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker安装ES5.2集群</h1>
+          <h1 class="post-title" itemprop="name headline">使用docker安装elasticsearch集群</h1>
         
 
         <div class="post-meta">
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">elasticsearch</span>
                   </a>
                 </span>
 
@@ -384,8 +384,8 @@
       
 
       
-        <h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定5.2.0版本的ES集群</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull elasticsearch:5.2.0</span><br></pre></td></tr></table></figure>
+        <h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
 
 <h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
 
@@ -397,7 +397,16 @@
 
 <p>其中user为elasticsearch的启动用户</p>
 <p>方法二：<br>修改/etc/fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
-<h2 id="yml配置"><a href="#yml配置" class="headerlink" title="yml配置"></a>yml配置</h2><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.jianshu.com/p/991c74a1bbf7" target="_blank" rel="noopener">https://www.jianshu.com/p/991c74a1bbf7</a><br><a href="https://blog.csdn.net/belonghuang157405/article/details/83301937" target="_blank" rel="noopener">https://blog.csdn.net/belonghuang157405/article/details/83301937</a></p>
+<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'2.2'</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">"ES_JAVA_OPTS=-Xms768m -Xmx768m"</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">"ES_JAVA_OPTS=-Xms768m -Xmx768m"</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">"ES_JAVA_OPTS=-Xms768m -Xmx768m"</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
 
       
     </div>
@@ -415,9 +424,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/es/" rel="tag"># es</a>
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
-            <a href="/tags/搜索/" rel="tag"># 搜索</a>
+            <a href="/tags/elasticsearch/" rel="tag"># elasticsearch</a>
           
         </div>
       
@@ -439,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/05/hello-elasticsearch/" rel="prev" title="hello elasticsearch">
+                hello elasticsearch <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,7 +541,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -588,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#拉取镜像"><span class="nav-number">1.</span> <span class="nav-text">拉取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚机配置"><span class="nav-number">2.</span> <span class="nav-text">虚机配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置vm-max-map-count"><span class="nav-number">2.1.</span> <span class="nav-text">设置vm_max_map_count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disable-swapping"><span class="nav-number">2.2.</span> <span class="nav-text">disable swapping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yml配置"><span class="nav-number">3.</span> <span class="nav-text">yml配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#拉取镜像"><span class="nav-number">1.</span> <span class="nav-text">拉取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚机配置"><span class="nav-number">2.</span> <span class="nav-text">虚机配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置vm-max-map-count"><span class="nav-number">2.1.</span> <span class="nav-text">设置vm_max_map_count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disable-swapping"><span class="nav-number">2.2.</span> <span class="nav-text">disable swapping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker配置文件"><span class="nav-number">3.</span> <span class="nav-text">docker配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log配置"><span class="nav-number">4.</span> <span class="nav-text">log配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止"><span class="nav-number">6.</span> <span class="nav-text">停止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>

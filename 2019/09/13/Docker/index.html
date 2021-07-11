@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="yanhangr">
 <meta property="og:description" content="概念篇Docker 面向对象 镜像（Image）类比对象，包含一整套Ubuntu 16.04 最小系统的 root 文件系统 容器（Container）类比实体类，即镜像运行的实体容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-18T13:34:28.211Z">
+<meta property="og:updated_time" content="2021-04-05T05:01:39.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门">
 <meta name="twitter:description" content="概念篇Docker 面向对象 镜像（Image）类比对象，包含一整套Ubuntu 16.04 最小系统的 root 文件系统 容器（Container）类比实体类，即镜像运行的实体容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器">
@@ -433,6 +433,9 @@
 <h2 id="常用命令篇"><a href="#常用命令篇" class="headerlink" title="常用命令篇"></a>常用命令篇</h2><p>所有命令，都可以通过下列命令去了解</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
+<p>其他命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker container <span class="built_in">exec</span> -it containId /bin/bash <span class="comment">#进入容器</span></span><br><span class="line">$ docker ps -a  <span class="comment">#查看运行的容器</span></span><br><span class="line">$ docker stop container containId <span class="comment">#停容器</span></span><br><span class="line">$ docker rm container containId  <span class="comment">#删除容器</span></span><br><span class="line">$ docker images <span class="comment">#查看当前docker的镜像</span></span><br><span class="line">$ docker rmi image imageId <span class="comment">#删除镜像</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -554,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -565,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
