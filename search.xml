@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>VUE学习</title>
+    <url>/2020/01/05/VUE%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="vue模板"><a href="#vue模板" class="headerlink" title="vue模板"></a>vue模板</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;&lt;/template&gt;</span><br><span class="line">&lt;script&gt;&lt;/script&gt;</span><br><span class="line">&lt;style&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="script部分"><a href="#script部分" class="headerlink" title="script部分"></a>script部分</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  name: <span class="string">&quot;Home&quot;</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    // 组件的方法</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    // watch擅长处理的场景：一个数据影响多个数据</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    // computed擅长处理的场景：一个数据受多个数据影响</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，<span class="variable">$el</span> 属性目前不可见。</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 在挂载开始之前被调用：相关的 render 函数首次被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 编译好的HTML挂载到页面完成后执行的事件钩子</span><br><span class="line">    // el 被新创建的 vm.<span class="variable">$el</span> 替换，并挂载到实例上去之后调用该钩子。</span><br><span class="line">    // 此钩子函数中一般会做一些ajax请求获取数据进行数据初始化</span><br><span class="line">    console.log(<span class="string">&quot;Home done&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</span><br><span class="line">  &#125;,</span><br><span class="line">  updated: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。</span><br><span class="line">    // 当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。</span><br><span class="line">    // 该钩子在服务器端渲染期间不被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 实例销毁之前调用。在这一步，实例仍然完全可用。</span><br><span class="line">  &#125;,</span><br><span class="line">  destroyed: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用。</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>转载地址：<a href="https://www.cnblogs.com/chenzeyongjsj/p/8093789.html">https://www.cnblogs.com/chenzeyongjsj/p/8093789.html</a></p>
+]]></content>
+      <categories>
+        <category>大前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker入门</title>
     <url>/2019/09/13/Docker/</url>
     <content><![CDATA[<h2 id="概念篇"><a href="#概念篇" class="headerlink" title="概念篇"></a>概念篇</h2><p>Docker 面向对象</p>
@@ -76,50 +90,6 @@
       </tags>
   </entry>
   <entry>
-    <title>VUE学习</title>
-    <url>/2020/01/05/VUE%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="vue模板"><a href="#vue模板" class="headerlink" title="vue模板"></a>vue模板</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;&lt;/template&gt;</span><br><span class="line">&lt;script&gt;&lt;/script&gt;</span><br><span class="line">&lt;style&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="script部分"><a href="#script部分" class="headerlink" title="script部分"></a>script部分</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  name: <span class="string">&quot;Home&quot;</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    // 组件的方法</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    // watch擅长处理的场景：一个数据影响多个数据</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    // computed擅长处理的场景：一个数据受多个数据影响</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，<span class="variable">$el</span> 属性目前不可见。</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 在挂载开始之前被调用：相关的 render 函数首次被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 编译好的HTML挂载到页面完成后执行的事件钩子</span><br><span class="line">    // el 被新创建的 vm.<span class="variable">$el</span> 替换，并挂载到实例上去之后调用该钩子。</span><br><span class="line">    // 此钩子函数中一般会做一些ajax请求获取数据进行数据初始化</span><br><span class="line">    console.log(<span class="string">&quot;Home done&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</span><br><span class="line">  &#125;,</span><br><span class="line">  updated: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。</span><br><span class="line">    // 当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。</span><br><span class="line">    // 该钩子在服务器端渲染期间不被调用。</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // 实例销毁之前调用。在这一步，实例仍然完全可用。</span><br><span class="line">  &#125;,</span><br><span class="line">  destroyed: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用。</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>转载地址：<a href="https://www.cnblogs.com/chenzeyongjsj/p/8093789.html">https://www.cnblogs.com/chenzeyongjsj/p/8093789.html</a></p>
-]]></content>
-      <categories>
-        <category>大前端</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello Hexo</title>
-    <url>/2019/07/28/hello-hexo/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建一篇文章"><a href="#创建一篇文章" class="headerlink" title="创建一篇文章"></a>创建一篇文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate 或者 hexo g</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="本地运行测试"><a href="#本地运行测试" class="headerlink" title="本地运行测试"></a>本地运行测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server 或者 hexo s</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="发布到远程服务器"><a href="#发布到远程服务器" class="headerlink" title="发布到远程服务器"></a>发布到远程服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy 或者 hexo d</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
-<h3 id="清除本地缓存"><a href="#清除本地缓存" class="headerlink" title="清除本地缓存"></a>清除本地缓存</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
-
-<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#相对路径插入图片，图片放在source/images</span></span><br><span class="line">![图片名称](/images/pictureName.png)</span><br><span class="line"><span class="comment">#图片可以放在文章所在的目录中，需要先在hexo目录下的配置文件_config.yml中修改为post_asset_folder: true 执行命令$ hexo new article_name，在source/_posts中会生成文章article_name.md和同名文件夹article_name。将图片资源放在article_name文件夹中，文章就可以使用相对路径引用图片资源了。</span></span><br><span class="line">![图片名称](pictureName.png)</span><br><span class="line"><span class="comment">#网络图片引用</span></span><br><span class="line">![图片标签](图片网络地址)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker安装Mysql</title>
     <url>/2019/09/18/docker%E5%AE%89%E8%A3%85mysql/</url>
     <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里是mysql 8</p>
@@ -156,23 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hello elasticsearch</title>
-    <url>/2021/04/05/hello-elasticsearch/</url>
-    <content><![CDATA[<p>日常工作主要是基于elasticsearch的垂直领域搜索功能开发，这里打算出个专题介绍如何通过ES来打造一个完整的搜索。<br>由于ES版本更新比较快，目前在写博客的时候已经到了7.12.0，这里也采用最新的版本来介绍。<br>大概分为以下三个模块来学习：ES基础、搜索、生产实战、源码分析</p>
-<h2 id="ES基础"><a href="#ES基础" class="headerlink" title="ES基础"></a>ES基础</h2><p>1、ES的安装和配置<br>&#x3D;&#x3D;&gt;<a href="https://yanhangr.github.io/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">使用docker安装elasticsearch集群</a><br>2、基本概念<br>mapping和setting<br>3、ES集群的查询和写入逻辑<br>4、query<br>5、aggregation<br>6、analysis<br>7、运维和监控</p>
-<h2 id="ES搜索"><a href="#ES搜索" class="headerlink" title="ES搜索"></a>ES搜索</h2><p>1、ES插件开发(基于hanlp的分词插件)<br>2、智能纠错<br>3、联想词</p>
-<h2 id="生产实战"><a href="#生产实战" class="headerlink" title="生产实战"></a>生产实战</h2><p>1、ES多活灾备<br>2、ES多种写入方式<br>3、基于Java注解的mapping生成工具<br>4、多集群多索引的通用写入查询功能<br>5、大数据量下的写入查询优化</p>
-<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
-]]></content>
-      <categories>
-        <category>elasticsearch</category>
-      </categories>
-      <tags>
-        <tag>搜索</tag>
-        <tag>elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo&#39;s theme next</title>
     <url>/2019/07/28/hexo-theme-next/</url>
     <content><![CDATA[<p>本博客采用hexo的Next主题，也是大部分hexo博客采用的主题之一。本文主要列举一些使用小技巧，更多使用说明可以参考<a href="http://theme-next.iissnan.com/getting-started.html">Next主题官网</a></p>
@@ -204,6 +157,110 @@
       </categories>
       <tags>
         <tag>log4j2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello Hexo</title>
+    <url>/2019/07/28/hello-hexo/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建一篇文章"><a href="#创建一篇文章" class="headerlink" title="创建一篇文章"></a>创建一篇文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate 或者 hexo g</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="本地运行测试"><a href="#本地运行测试" class="headerlink" title="本地运行测试"></a>本地运行测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server 或者 hexo s</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="发布到远程服务器"><a href="#发布到远程服务器" class="headerlink" title="发布到远程服务器"></a>发布到远程服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy 或者 hexo d</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+<h3 id="清除本地缓存"><a href="#清除本地缓存" class="headerlink" title="清除本地缓存"></a>清除本地缓存</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#相对路径插入图片，图片放在source/images</span></span><br><span class="line">![图片名称](/images/pictureName.png)</span><br><span class="line"><span class="comment">#图片可以放在文章所在的目录中，需要先在hexo目录下的配置文件_config.yml中修改为post_asset_folder: true 执行命令$ hexo new article_name，在source/_posts中会生成文章article_name.md和同名文件夹article_name。将图片资源放在article_name文件夹中，文章就可以使用相对路径引用图片资源了。</span></span><br><span class="line">![图片名称](pictureName.png)</span><br><span class="line"><span class="comment">#网络图片引用</span></span><br><span class="line">![图片标签](图片网络地址)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hello elasticsearch</title>
+    <url>/2021/04/05/hello-elasticsearch/</url>
+    <content><![CDATA[<p>日常工作主要是基于elasticsearch的垂直领域搜索功能开发，这里打算出个专题介绍如何通过ES来打造一个完整的搜索。<br>由于ES版本更新比较快，目前在写博客的时候已经到了7.12.0，这里也采用最新的版本来介绍。<br>大概分为以下三个模块来学习：ES基础、搜索、生产实战、源码分析</p>
+<h2 id="ES基础"><a href="#ES基础" class="headerlink" title="ES基础"></a>ES基础</h2><p>1、ES的安装和配置<br>&#x3D;&#x3D;&gt;<a href="https://yanhangr.github.io/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">使用docker安装elasticsearch集群</a><br>2、基本概念<br>mapping和setting<br>3、ES集群的查询和写入逻辑<br>4、query<br>5、aggregation<br>6、analysis<br>7、运维和监控</p>
+<h2 id="ES搜索"><a href="#ES搜索" class="headerlink" title="ES搜索"></a>ES搜索</h2><p>1、ES插件开发(基于hanlp的分词插件)<br>2、智能纠错<br>3、联想词</p>
+<h2 id="生产实战"><a href="#生产实战" class="headerlink" title="生产实战"></a>生产实战</h2><p>1、ES多活灾备<br>2、ES多种写入方式<br>3、基于Java注解的mapping生成工具<br>4、多集群多索引的通用写入查询功能<br>5、大数据量下的写入查询优化</p>
+<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>搜索</tag>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用docker安装elasticsearch集群</title>
+    <url>/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
+<p>其中user为elasticsearch的启动用户</p>
+<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
+<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于scrapy的爬虫1--安装scrapy</title>
+    <url>/2019/07/28/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB-1/</url>
+    <content><![CDATA[<p>之前写过简单爬虫，主要用了BeautifulSoup4、request等模块。现在开始学习爬虫框架scrapy，作为记录使用，有错误欢迎反馈。<br>(ps:没开始写之前，简单用了一下，真的很好用啊)</p>
+<span id="more"></span>
+
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="基于python3-7开发（目前最新版本）"><a href="#基于python3-7开发（目前最新版本）" class="headerlink" title="基于python3.7开发（目前最新版本）"></a>基于python3.7开发（目前最新版本）</h3><h3 id="编辑器：pycharm-（习惯使用IDEA）"><a href="#编辑器：pycharm-（习惯使用IDEA）" class="headerlink" title="编辑器：pycharm （习惯使用IDEA）"></a>编辑器：pycharm （习惯使用IDEA）</h3><h3 id="功能库：anaconda（解决各种包的依赖问题）"><a href="#功能库：anaconda（解决各种包的依赖问题）" class="headerlink" title="功能库：anaconda（解决各种包的依赖问题）"></a>功能库：anaconda（解决各种包的依赖问题）</h3><h3 id="官方社区、文档-重要啊！！！-："><a href="#官方社区、文档-重要啊！！！-：" class="headerlink" title="官方社区、文档(重要啊！！！)："></a>官方社区、文档(重要啊！！！)：</h3><p><a href="https://github.com/search?q=scrapy">scrapy on GitHub</a><br><a href="https://docs.scrapy.org/en/1.6/">英文文档</a><br><a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/">中文文档</a></p>
+<p>关于pycharm、anaconda的安装配置，网上教程比较多，这里不说了。所以这里从安装scrapy开始</p>
+<h2 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h2><p>因为有anaconda，我们依赖各种包现在都很方便，接下来我们便使用它来安装</p>
+<h3 id="查看是否已经安装scrapy"><a href="#查看是否已经安装scrapy" class="headerlink" title="查看是否已经安装scrapy"></a>查看是否已经安装scrapy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda list scrapy</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询conda支持的scrapy版本"><a href="#查询conda支持的scrapy版本" class="headerlink" title="查询conda支持的scrapy版本"></a>查询conda支持的scrapy版本</h3><p>我的python3.7显示匹配的Scrapy v1.6版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda search scrapy</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行安装"><a href="#执行安装" class="headerlink" title="执行安装"></a>执行安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install scrapy </span><br></pre></td></tr></table></figure>
+<p>选择“yes”，静待它安装完成，如果中途遇到网络不好，则继续执行这一步，conda会继续下载上次没有下载的包。</p>
+]]></content>
+      <categories>
+        <category>爬虫</category>
+      </categories>
+      <tags>
+        <tag>scrapy</tag>
+        <tag>python3</tag>
       </tags>
   </entry>
   <entry>
@@ -248,73 +305,21 @@
       </tags>
   </entry>
   <entry>
-    <title>基于scrapy的爬虫1--安装scrapy</title>
-    <url>/2019/07/28/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB-1/</url>
-    <content><![CDATA[<p>之前写过简单爬虫，主要用了BeautifulSoup4、request等模块。现在开始学习爬虫框架scrapy，作为记录使用，有错误欢迎反馈。<br>(ps:没开始写之前，简单用了一下，真的很好用啊)</p>
-<span id="more"></span>
-
-
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="基于python3-7开发（目前最新版本）"><a href="#基于python3-7开发（目前最新版本）" class="headerlink" title="基于python3.7开发（目前最新版本）"></a>基于python3.7开发（目前最新版本）</h3><h3 id="编辑器：pycharm-（习惯使用IDEA）"><a href="#编辑器：pycharm-（习惯使用IDEA）" class="headerlink" title="编辑器：pycharm （习惯使用IDEA）"></a>编辑器：pycharm （习惯使用IDEA）</h3><h3 id="功能库：anaconda（解决各种包的依赖问题）"><a href="#功能库：anaconda（解决各种包的依赖问题）" class="headerlink" title="功能库：anaconda（解决各种包的依赖问题）"></a>功能库：anaconda（解决各种包的依赖问题）</h3><h3 id="官方社区、文档-重要啊！！！-："><a href="#官方社区、文档-重要啊！！！-：" class="headerlink" title="官方社区、文档(重要啊！！！)："></a>官方社区、文档(重要啊！！！)：</h3><p><a href="https://github.com/search?q=scrapy">scrapy on GitHub</a><br><a href="https://docs.scrapy.org/en/1.6/">英文文档</a><br><a href="https://scrapy-chs.readthedocs.io/zh_CN/1.0/">中文文档</a></p>
-<p>关于pycharm、anaconda的安装配置，网上教程比较多，这里不说了。所以这里从安装scrapy开始</p>
-<h2 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h2><p>因为有anaconda，我们依赖各种包现在都很方便，接下来我们便使用它来安装</p>
-<h3 id="查看是否已经安装scrapy"><a href="#查看是否已经安装scrapy" class="headerlink" title="查看是否已经安装scrapy"></a>查看是否已经安装scrapy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda list scrapy</span><br></pre></td></tr></table></figure>
-
-<h3 id="查询conda支持的scrapy版本"><a href="#查询conda支持的scrapy版本" class="headerlink" title="查询conda支持的scrapy版本"></a>查询conda支持的scrapy版本</h3><p>我的python3.7显示匹配的Scrapy v1.6版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda search scrapy</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行安装"><a href="#执行安装" class="headerlink" title="执行安装"></a>执行安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install scrapy </span><br></pre></td></tr></table></figure>
-<p>选择“yes”，静待它安装完成，如果中途遇到网络不好，则继续执行这一步，conda会继续下载上次没有下载的包。</p>
+    <title>springboot--整合spring-security</title>
+    <url>/2020/02/08/springboot-%E6%95%B4%E5%90%88spring-security/</url>
+    <content><![CDATA[<p>spring security和shiro是两个专注于认证和授权的安全框架，因为在做的文库系统是基于springboot的，所以这里学习一下如何整合spring security</p>
+<h2 id="基于角色的访问控制（RBAC-role-based-acess-control）"><a href="#基于角色的访问控制（RBAC-role-based-acess-control）" class="headerlink" title="基于角色的访问控制（RBAC role-based acess control）"></a>基于角色的访问控制（RBAC role-based acess control）</h2><p><a href="https://www.cnblogs.com/berandwaddle/p/11343824.html">https://www.cnblogs.com/berandwaddle/p/11343824.html</a></p>
+<h3 id="账户锁定"><a href="#账户锁定" class="headerlink" title="账户锁定"></a>账户锁定</h3><p><a href="https://segmentfault.com/a/1190000012518537">https://segmentfault.com/a/1190000012518537</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.jianshu.com/p/5b9f1f4de88d">https://www.jianshu.com/p/5b9f1f4de88d</a>   </p>
+<p><a href="https://www.cnblogs.com/xifengxiaoma/p/11106220.html">https://www.cnblogs.com/xifengxiaoma/p/11106220.html</a></p>
+<p><a href="https://www.jianshu.com/p/d5ce890c67f7">https://www.jianshu.com/p/d5ce890c67f7</a></p>
+<p><a href="https://www.cnblogs.com/felordcn/p/12142505.html">https://www.cnblogs.com/felordcn/p/12142505.html</a></p>
 ]]></content>
       <categories>
-        <category>爬虫</category>
+        <category>spring boot</category>
       </categories>
       <tags>
-        <tag>scrapy</tag>
-        <tag>python3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用docker安装elasticsearch集群</title>
-    <url>/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
-
-<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
-<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
-<p>其中user为elasticsearch的启动用户</p>
-<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
-<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
-<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
-<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
-]]></content>
-      <categories>
-        <category>elasticsearch</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于scrapy的爬虫2--第一个小爬虫</title>
-    <url>/2019/07/31/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB2-%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<p>先放这里，明天继续写！</p>
-]]></content>
-      <categories>
-        <category>爬虫</category>
-      </categories>
-      <tags>
-        <tag>scrapy</tag>
-        <tag>python3</tag>
+        <tag>spring security</tag>
       </tags>
   </entry>
   <entry>
@@ -372,21 +377,16 @@
       </tags>
   </entry>
   <entry>
-    <title>springboot--整合spring-security</title>
-    <url>/2020/02/08/springboot-%E6%95%B4%E5%90%88spring-security/</url>
-    <content><![CDATA[<p>spring security和shiro是两个专注于认证和授权的安全框架，因为在做的文库系统是基于springboot的，所以这里学习一下如何整合spring security</p>
-<h2 id="基于角色的访问控制（RBAC-role-based-acess-control）"><a href="#基于角色的访问控制（RBAC-role-based-acess-control）" class="headerlink" title="基于角色的访问控制（RBAC role-based acess control）"></a>基于角色的访问控制（RBAC role-based acess control）</h2><p><a href="https://www.cnblogs.com/berandwaddle/p/11343824.html">https://www.cnblogs.com/berandwaddle/p/11343824.html</a></p>
-<h3 id="账户锁定"><a href="#账户锁定" class="headerlink" title="账户锁定"></a>账户锁定</h3><p><a href="https://segmentfault.com/a/1190000012518537">https://segmentfault.com/a/1190000012518537</a></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.jianshu.com/p/5b9f1f4de88d">https://www.jianshu.com/p/5b9f1f4de88d</a>   </p>
-<p><a href="https://www.cnblogs.com/xifengxiaoma/p/11106220.html">https://www.cnblogs.com/xifengxiaoma/p/11106220.html</a></p>
-<p><a href="https://www.jianshu.com/p/d5ce890c67f7">https://www.jianshu.com/p/d5ce890c67f7</a></p>
-<p><a href="https://www.cnblogs.com/felordcn/p/12142505.html">https://www.cnblogs.com/felordcn/p/12142505.html</a></p>
+    <title>基于scrapy的爬虫2--第一个小爬虫</title>
+    <url>/2019/07/31/%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E7%88%AC%E8%99%AB2-%E5%9F%BA%E4%BA%8Escrapy%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<p>先放这里，明天继续写！</p>
 ]]></content>
       <categories>
-        <category>spring boot</category>
+        <category>爬虫</category>
       </categories>
       <tags>
-        <tag>spring security</tag>
+        <tag>scrapy</tag>
+        <tag>python3</tag>
       </tags>
   </entry>
   <entry>
