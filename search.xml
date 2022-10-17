@@ -18,73 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装Mysql</title>
-    <url>/docker%E5%AE%89%E8%A3%85mysql/</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里是mysql 8</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql</span><br></pre></td></tr></table></figure>
-<p>指定拉取版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql:5.6</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run \</span><br><span class="line">    -p 3306:3306 \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -v /docker/data/mysql/data:/var/lib/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/log:/var/log/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/config/my.cnf:/etc/mysql/my.cnf:rw \</span><br><span class="line">    -v /etc/localtime:/etc/localtime:ro \</span><br><span class="line">    --name mysql \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -d mysql</span><br></pre></td></tr></table></figure>
-
-<p>-p 表示端口映射，宿主机端口:容器端口<br>-e 表示设置环境变量 MYSQL_ROOT_PASSWORD是root用户的登陆密码<br>-v 表示挂载数据卷<br>-d 表示后台运行容器<br>–name 表示对容器重命名</p>
-<p>注：-v 挂载的是到宿主机的文件夹，而my.cnf是个文件，会报如下错误:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Are you trying to mount a directory onto a file (or vice-versa)? Check <span class="keyword">if</span> the specified host path exists and is the expected <span class="built_in">type</span>.</span><br></pre></td></tr></table></figure>
-<p>需要预在挂载目录建好该文件”&#x2F;docker&#x2F;data&#x2F;mysql&#x2F;config&#x2F;my.cnf”</p>
-<p>这个文件怎么来呢，可以从如下步骤获得：</p>
-<p>先简单run一个mysql_test</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run --name mysql_test -d mysql</span><br></pre></td></tr></table></figure>
-
-<p>然后从这个mysql容器里拷贝到本地宿主机来，”b858438722c5”是mysql_test这个容器ID</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">cp</span> b858438722c5:/etc/mysql/my.cnf /docker/data/mysql/config/my.cnf</span><br></pre></td></tr></table></figure>
-
-<p>最后删除这个容器即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">rm</span> -f b858438722c5</span><br></pre></td></tr></table></figure>
-
-<h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it mysql /bin/bash</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用docker安装elasticsearch集群</title>
-    <url>/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
-
-<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
-<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
-<p>其中user为elasticsearch的启动用户</p>
-<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
-<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
-<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
-<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
-]]></content>
-      <categories>
-        <category>elasticsearch</category>
-      </categories>
-      <tags>
-        <tag>elasticsearch</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mysql--数据库字段</title>
     <url>/Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/</url>
     <content><![CDATA[<h2 id="数据库字段规范"><a href="#数据库字段规范" class="headerlink" title="数据库字段规范"></a>数据库字段规范</h2><h3 id="主键ID-（unsigned-int-自增）"><a href="#主键ID-（unsigned-int-自增）" class="headerlink" title="主键ID （unsigned int 自增）"></a>主键ID （unsigned int 自增）</h3><p>可存储0 ~ 4294967295之间，占4个字节（byte），32位；单表最大可存储42亿数据完全够用<br>相比 unsigned bigint完全用不上，占用空间又大，其实单表超过千万条数据，就应该分表了</p>
@@ -160,6 +93,99 @@
       </tags>
   </entry>
   <entry>
+    <title>使用docker安装elasticsearch集群</title>
+    <url>/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
+<p>其中user为elasticsearch的启动用户</p>
+<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
+<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker安装Mysql</title>
+    <url>/docker%E5%AE%89%E8%A3%85mysql/</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里是mysql 8</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql</span><br></pre></td></tr></table></figure>
+<p>指定拉取版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql:5.6</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run \</span><br><span class="line">    -p 3306:3306 \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -v /docker/data/mysql/data:/var/lib/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/log:/var/log/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/config/my.cnf:/etc/mysql/my.cnf:rw \</span><br><span class="line">    -v /etc/localtime:/etc/localtime:ro \</span><br><span class="line">    --name mysql \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -d mysql</span><br></pre></td></tr></table></figure>
+
+<p>-p 表示端口映射，宿主机端口:容器端口<br>-e 表示设置环境变量 MYSQL_ROOT_PASSWORD是root用户的登陆密码<br>-v 表示挂载数据卷<br>-d 表示后台运行容器<br>–name 表示对容器重命名</p>
+<p>注：-v 挂载的是到宿主机的文件夹，而my.cnf是个文件，会报如下错误:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Are you trying to mount a directory onto a file (or vice-versa)? Check <span class="keyword">if</span> the specified host path exists and is the expected <span class="built_in">type</span>.</span><br></pre></td></tr></table></figure>
+<p>需要预在挂载目录建好该文件”&#x2F;docker&#x2F;data&#x2F;mysql&#x2F;config&#x2F;my.cnf”</p>
+<p>这个文件怎么来呢，可以从如下步骤获得：</p>
+<p>先简单run一个mysql_test</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run --name mysql_test -d mysql</span><br></pre></td></tr></table></figure>
+
+<p>然后从这个mysql容器里拷贝到本地宿主机来，”b858438722c5”是mysql_test这个容器ID</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">cp</span> b858438722c5:/etc/mysql/my.cnf /docker/data/mysql/config/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p>最后删除这个容器即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">rm</span> -f b858438722c5</span><br></pre></td></tr></table></figure>
+
+<h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo迁移</title>
+    <url>/hexo%E8%BF%81%E7%A7%BB/</url>
+    <content><![CDATA[<p>背景：之前hexo是在windows上编写，这里将hexo迁移到mac</p>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>前置安装homebrew，可以参考文章</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装nodejs</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建目录</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装hexo，局部安装的好处是可以使得不同目录安装不同的版本</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装需要使用命令 npx hexo &lt;<span class="built_in">command</span>&gt;</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init yanhangr.github.io</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迁移必要文件"><a href="#迁移必要文件" class="headerlink" title="迁移必要文件"></a>迁移必要文件</h2><p>复制win下的hexo部分文件到你Mac刚初始化的yanhangr.github.io下</p>
+<p>必须复制文件夹：scaffolds，source</p>
+<p>可选复制 _config.yml，themes</p>
+<p>配置和主题这两个目录可能因为版本原因，不再支持你在mac新安装的hexo版本，可以不用复制，稍后再配置这两项即可</p>
+<h2 id="github推送配置"><a href="#github推送配置" class="headerlink" title="github推送配置"></a>github推送配置</h2><p>修改yanhangr.github.io根目录下配置_config.yml</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;project&gt;</span><br><span class="line">  branch: master </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npx hexo d</span><br><span class="line"><span class="comment">#报错如下</span></span><br><span class="line">remote: Support <span class="keyword">for</span> password authentication was removed on August 13, 2021.</span><br><span class="line"></span><br><span class="line"><span class="comment">#解决途径，&lt;token&gt;使用github的personal access token替代，可以配置具体权限和期限</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://&lt;token&gt;@github.com/yanhangr/yanhangr.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>github配置personal access token路径，如下图</p>
+<p><img src="/images/hexo/personal_access_token.png" alt="personal_access_token"></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello Hexo</title>
     <url>/hello-hexo/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -190,42 +216,20 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo迁移</title>
-    <url>/hexo%E8%BF%81%E7%A7%BB/</url>
-    <content><![CDATA[<p>背景：之前hexo是在windows上编写，这里将hexo迁移到mac</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>前置安装homebrew，可以参考文章</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装nodejs</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建目录</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装hexo，局部安装的好处是可以使得不同目录安装不同的版本</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装需要使用命令 npx hexo &lt;<span class="built_in">command</span>&gt;</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init yanhangr.github.io</span></span><br></pre></td></tr></table></figure>
+    <title>hexo配置</title>
+    <url>/hexo%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>本博客使用typora编写，采用Next主题，这里简单介绍一些hexo使用中的一些小技巧</p>
+<h2 id="编辑功能"><a href="#编辑功能" class="headerlink" title="编辑功能"></a>编辑功能</h2><h3 id="设置标题、标签、分类"><a href="#设置标题、标签、分类" class="headerlink" title="设置标题、标签、分类"></a>设置标题、标签、分类</h3><p>typora上下各使用3个下划线“—”，把title、tags、categories包起来</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title:titel</span><br><span class="line">tags:</span><br><span class="line">  - 标签1</span><br><span class="line">  - 标签2</span><br><span class="line">categories:</span><br><span class="line">  - 分类</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
-<h2 id="迁移必要文件"><a href="#迁移必要文件" class="headerlink" title="迁移必要文件"></a>迁移必要文件</h2><p>复制win下的hexo部分文件到你Mac刚初始化的yanhangr.github.io下</p>
-<p>必须复制文件夹：scaffolds，source</p>
-<p>可选复制 _config.yml，themes</p>
-<p>配置和主题这两个目录可能因为版本原因，不再支持你在mac新安装的hexo版本，可以不用复制，稍后再配置这两项即可</p>
-<h2 id="github推送配置"><a href="#github推送配置" class="headerlink" title="github推送配置"></a>github推送配置</h2><p>修改yanhangr.github.io根目录下配置_config.yml</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;project&gt;</span><br><span class="line">  branch: master </span><br></pre></td></tr></table></figure>
+<h3 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">截断处加入如下：</span></span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npx hexo d</span><br><span class="line"><span class="comment">#报错如下</span></span><br><span class="line">remote: Support <span class="keyword">for</span> password authentication was removed on August 13, 2021.</span><br><span class="line"></span><br><span class="line"><span class="comment">#解决途径，&lt;token&gt;使用github的personal access token替代，可以配置具体权限和期限</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://&lt;token&gt;@github.com/yanhangr/yanhangr.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="config-yml配置"><a href="#config-yml配置" class="headerlink" title="_config.yml配置"></a>_config.yml配置</h2><h3 id="url配置"><a href="#url配置" class="headerlink" title="url配置"></a>url配置</h3><p>在_post目录下创建文件夹管理文章，且不改变url，设置permalink即可，其中name表示文件名称，这个时候目录可以随意调整，title随意变更而不影响文章地址</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">URL</span></span><br><span class="line">url: http://example.com</span><br><span class="line">permalink: :name/</span><br></pre></td></tr></table></figure>
 
-<p>github配置personal access token路径，如下图</p>
-<p><img src="/images/hexo/personal_access_token.png" alt="personal_access_token"></p>
-<p>参考文档<br><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a href="https://www.i4k.xyz/article/soyawww/118147820">https://www.i4k.xyz/article/soyawww/118147820</a></p>
-<p>theme主题配置文档<br><a href="http://theme-next.iissnan.com/getting-started.html#download-next-theme">http://theme-next.iissnan.com/getting-started.html#download-next-theme</a></p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo&#39;s theme next</title>
-    <url>/hexo-theme-next/</url>
-    <content><![CDATA[<p>本博客采用hexo的Next主题，也是大部分hexo博客采用的主题之一。本文主要列举一些使用小技巧，更多使用说明可以参考<a href="http://theme-next.iissnan.com/getting-started.html">Next主题官网</a></p>
-<span id="more"></span>
 
-<h2 id="编辑功能"><a href="#编辑功能" class="headerlink" title="编辑功能"></a>编辑功能</h2><h3 id="增加“阅读全文”功能"><a href="#增加“阅读全文”功能" class="headerlink" title="增加“阅读全文”功能"></a>增加“阅读全文”功能</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">截断处加入如下：</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="添加标签、分类"><a href="#添加标签、分类" class="headerlink" title="添加标签、分类"></a>添加标签、分类</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tags:</span><br><span class="line">  - 标签1</span><br><span class="line">  - 标签2</span><br><span class="line"></span><br><span class="line">categories:</span><br><span class="line">  - 分类</span><br></pre></td></tr></table></figure>
+
 
 <h2 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h2><h3 id="留言插件-gitTalk"><a href="#留言插件-gitTalk" class="headerlink" title="留言插件 gitTalk"></a>留言插件 gitTalk</h3>]]></content>
       <categories>
@@ -233,22 +237,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>springboot--log4j2配置学习</title>
-    <url>/springboot%E6%95%B4%E5%90%88log4j2/</url>
-    <content><![CDATA[<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/">https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/</a></p>
-<p><a href="https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA">https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA</a></p>
-<p><a href="https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html">https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html</a></p>
-<p><a href="https://www.cnblogs.com/keeya/p/10101547.html">https://www.cnblogs.com/keeya/p/10101547.html</a></p>
-<p><a href="http://dkylin.com/archives/2017/spring-boot-log4j2-config.html">http://dkylin.com/archives/2017/spring-boot-log4j2-config.html</a></p>
-]]></content>
-      <categories>
-        <category>spring boot</category>
-      </categories>
-      <tags>
-        <tag>log4j2</tag>
       </tags>
   </entry>
   <entry>
@@ -291,6 +279,22 @@
       </tags>
   </entry>
   <entry>
+    <title>springboot--log4j2配置学习</title>
+    <url>/springboot%E6%95%B4%E5%90%88log4j2/</url>
+    <content><![CDATA[<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/">https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/</a></p>
+<p><a href="https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA">https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA</a></p>
+<p><a href="https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html">https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html</a></p>
+<p><a href="https://www.cnblogs.com/keeya/p/10101547.html">https://www.cnblogs.com/keeya/p/10101547.html</a></p>
+<p><a href="http://dkylin.com/archives/2017/spring-boot-log4j2-config.html">http://dkylin.com/archives/2017/spring-boot-log4j2-config.html</a></p>
+]]></content>
+      <categories>
+        <category>spring boot</category>
+      </categories>
+      <tags>
+        <tag>log4j2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>springboot--整合spring-security</title>
     <url>/springboot%E6%95%B4%E5%90%88spring-security/</url>
     <content><![CDATA[<p>spring security和shiro是两个专注于认证和授权的安全框架，因为在做的文库系统是基于springboot的，所以这里学习一下如何整合spring security</p>
@@ -320,6 +324,47 @@
       </categories>
       <tags>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端项目快速上手</title>
+    <url>/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
+    <content><![CDATA[<p>最近在做类百度文库系统，这次需要自己写前端….; 作为一枚后端开发工程师，为了搭建前端系统，这里快速学习一下可能会涉及到的前端技术。</p>
+<h2 id="前端术语"><a href="#前端术语" class="headerlink" title="前端术语"></a>前端术语</h2><h4 id="前端三驾马车"><a href="#前端三驾马车" class="headerlink" title="前端三驾马车"></a>前端三驾马车</h4><p>html、css、js</p>
+<p>html负责前端结构；css负责前端展现样式；js负责前端动态功能；<br>html是主体，装载各种dom元素；css用来装饰dom元素；javascript控制dom元素。<br>ES5&#x2F;ES6是指JS的ECMAScript，规定其语法的东西</p>
+<p>参考文档<br>【讲html&#x2F;css、js】<a href="https://www.w3school.com.cn/h.asp">https://www.w3school.com.cn/h.asp</a><br>【讲js如何操作DOM】<a href="https://www.cnblogs.com/zxt-17862802783/p/7498790.html">https://www.cnblogs.com/zxt-17862802783/p/7498790.html</a><br>【js的两样东西ES和DOM】<a href="https://www.cnblogs.com/sunshinezjb/p/9248533.html">https://www.cnblogs.com/sunshinezjb/p/9248533.html</a></p>
+<h4 id="node-js、npm、webpack"><a href="#node-js、npm、webpack" class="headerlink" title="node.js、npm、webpack"></a>node.js、npm、webpack</h4><p>node.js是js的运行环境；类比到jvm是Java的运行环境</p>
+<p>npm是Node.js的包管理工具（package manager）</p>
+<p>webpack是前端打包工具</p>
+<h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h4><p>也即vue.js，前端开源框架，相同开源框架还有Angular、React。</p>
+<p>因为国内对vue使用率较高，所以接下来以vue.js设计的技术来展开。</p>
+<h2 id="vue涉及技术"><a href="#vue涉及技术" class="headerlink" title="vue涉及技术"></a>vue涉及技术</h2><p>vue-cli：vue脚手架，基于此可以快速搭建vue项目</p>
+<p>vuex：全局状态管理框架</p>
+<p>vue-router：路由</p>
+<p>axios：http框架，和后端接口交互</p>
+<p>element-ui ：基于vue的UI组件库，由饿了么开发；另外还有阿里的 ant-design-vue等组件库</p>
+<h2 id="参考项目"><a href="#参考项目" class="headerlink" title="参考项目"></a>参考项目</h2><p>在GitHub&#x2F;Gitee 找到了两个开源项目，以此作为参考足以继续下面的文库前端开发</p>
+<h3 id="vue-element-ui"><a href="#vue-element-ui" class="headerlink" title="vue-element-ui"></a>vue-element-ui</h3><p>源码地址：<br>GitHub：<a href="https://github.com/PanJiaChen/vue-element-admin">https://github.com/PanJiaChen/vue-element-admin</a><br>Gitee：<a href="https://gitee.com/panjiachen/vue-element-admin">https://gitee.com/panjiachen/vue-element-admin</a></p>
+<p>参考文档：<br><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/">https://panjiachen.github.io/vue-element-admin-site/zh/guide/</a></p>
+<h3 id="mall-admin-web"><a href="#mall-admin-web" class="headerlink" title="mall-admin-web"></a>mall-admin-web</h3><p>源码地址：<br>GitHub：<a href="https://github.com/macrozheng/mall-admin-web">https://github.com/macrozheng/mall-admin-web</a><br>Gitee: <a href="https://gitee.com/macrozheng/mall-admin-web">https://gitee.com/macrozheng/mall-admin-web</a></p>
+<p>参考文档：<br><a href="http://www.macrozheng.com/#/foreword/mall_foreword_01">http://www.macrozheng.com/#/foreword/mall_foreword_01</a></p>
+<h2 id="基于vue-cli脚手架创建项目"><a href="#基于vue-cli脚手架创建项目" class="headerlink" title="基于vue-cli脚手架创建项目"></a>基于vue-cli脚手架创建项目</h2><h3 id="安裝vue-cli"><a href="#安裝vue-cli" class="headerlink" title="安裝vue-cli"></a>安裝vue-cli</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g @vue/cli</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">yarn global add @vue/cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>我用的是 vue ui</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vue create my-project</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
+<p>插件安装选择</p>
+<p><img src="/images/vue-cli.png"></p>
+<p>1、router history or hash模式选择，这里我们选择history模式<br>参考文档<br><a href="https://www.cnblogs.com/youngly/p/9324608.html">https://www.cnblogs.com/youngly/p/9324608.html</a><br><a href="https://blog.csdn.net/Gabriel_wei/article/details/89631787">https://blog.csdn.net/Gabriel_wei/article/details/89631787</a></p>
+<p>2、css预处理器选择<br>dart-sass和node-sass选择，这里我们选择的是node-sass，但好像dart-sass更好一点</p>
+]]></content>
+      <categories>
+        <category>大前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>element-ui</tag>
+        <tag>axios</tag>
       </tags>
   </entry>
   <entry>
@@ -377,6 +422,16 @@
       </tags>
   </entry>
   <entry>
+    <title>我的文库系统（1）-- 文档在线预览调研</title>
+    <url>/%E6%88%91%E7%9A%84%E6%96%87%E5%BA%93%E7%B3%BB%E7%BB%9F%EF%BC%881%EF%BC%89--%20%E6%96%87%E6%A1%A3%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88%E8%B0%83%E7%A0%94/</url>
+    <content><![CDATA[<h2 id="商业解决方案"><a href="#商业解决方案" class="headerlink" title="商业解决方案"></a>商业解决方案</h2><p>永中文档  <a href="http://www.yozodcs.com/">http://www.yozodcs.com/</a><br>office365 <a href="https://officeweb365.com/Default/Viewview">https://officeweb365.com/Default/Viewview</a><br>IDOCV     <a href="https://www.idocv.com/examples.html">https://www.idocv.com/examples.html</a><br>一般都是参与文档底层解析，然后再去展示</p>
+<h2 id="开源解决方案"><a href="#开源解决方案" class="headerlink" title="开源解决方案"></a>开源解决方案</h2><p>kkFileView <a href="https://gitee.com/kekingcn/file-online-preview/wikis/pages">https://gitee.com/kekingcn/file-online-preview/wikis/pages</a></p>
+]]></content>
+      <categories>
+        <category>文库</category>
+      </categories>
+  </entry>
+  <entry>
     <title>我的文库系统--用户角色设计</title>
     <url>/%E6%88%91%E7%9A%84%E6%96%87%E5%BA%93%E7%B3%BB%E7%BB%9F-%E7%94%A8%E6%88%B7%E8%A7%92%E8%89%B2%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p>网站用户角色，应该分为前台用户角色和后台用户角色，所以设计数据库表和代码之前，先把业务背景思考清楚。</p>
@@ -390,57 +445,6 @@
       <categories>
         <category>文库</category>
       </categories>
-  </entry>
-  <entry>
-    <title>我的文库系统（1）-- 文档在线预览调研</title>
-    <url>/%E6%88%91%E7%9A%84%E6%96%87%E5%BA%93%E7%B3%BB%E7%BB%9F%EF%BC%881%EF%BC%89--%20%E6%96%87%E6%A1%A3%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88%E8%B0%83%E7%A0%94/</url>
-    <content><![CDATA[<h2 id="商业解决方案"><a href="#商业解决方案" class="headerlink" title="商业解决方案"></a>商业解决方案</h2><p>永中文档  <a href="http://www.yozodcs.com/">http://www.yozodcs.com/</a><br>office365 <a href="https://officeweb365.com/Default/Viewview">https://officeweb365.com/Default/Viewview</a><br>IDOCV     <a href="https://www.idocv.com/examples.html">https://www.idocv.com/examples.html</a><br>一般都是参与文档底层解析，然后再去展示</p>
-<h2 id="开源解决方案"><a href="#开源解决方案" class="headerlink" title="开源解决方案"></a>开源解决方案</h2><p>kkFileView <a href="https://gitee.com/kekingcn/file-online-preview/wikis/pages">https://gitee.com/kekingcn/file-online-preview/wikis/pages</a></p>
-]]></content>
-      <categories>
-        <category>文库</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>前端项目快速上手</title>
-    <url>/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</url>
-    <content><![CDATA[<p>最近在做类百度文库系统，这次需要自己写前端….; 作为一枚后端开发工程师，为了搭建前端系统，这里快速学习一下可能会涉及到的前端技术。</p>
-<h2 id="前端术语"><a href="#前端术语" class="headerlink" title="前端术语"></a>前端术语</h2><h4 id="前端三驾马车"><a href="#前端三驾马车" class="headerlink" title="前端三驾马车"></a>前端三驾马车</h4><p>html、css、js</p>
-<p>html负责前端结构；css负责前端展现样式；js负责前端动态功能；<br>html是主体，装载各种dom元素；css用来装饰dom元素；javascript控制dom元素。<br>ES5&#x2F;ES6是指JS的ECMAScript，规定其语法的东西</p>
-<p>参考文档<br>【讲html&#x2F;css、js】<a href="https://www.w3school.com.cn/h.asp">https://www.w3school.com.cn/h.asp</a><br>【讲js如何操作DOM】<a href="https://www.cnblogs.com/zxt-17862802783/p/7498790.html">https://www.cnblogs.com/zxt-17862802783/p/7498790.html</a><br>【js的两样东西ES和DOM】<a href="https://www.cnblogs.com/sunshinezjb/p/9248533.html">https://www.cnblogs.com/sunshinezjb/p/9248533.html</a></p>
-<h4 id="node-js、npm、webpack"><a href="#node-js、npm、webpack" class="headerlink" title="node.js、npm、webpack"></a>node.js、npm、webpack</h4><p>node.js是js的运行环境；类比到jvm是Java的运行环境</p>
-<p>npm是Node.js的包管理工具（package manager）</p>
-<p>webpack是前端打包工具</p>
-<h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h4><p>也即vue.js，前端开源框架，相同开源框架还有Angular、React。</p>
-<p>因为国内对vue使用率较高，所以接下来以vue.js设计的技术来展开。</p>
-<h2 id="vue涉及技术"><a href="#vue涉及技术" class="headerlink" title="vue涉及技术"></a>vue涉及技术</h2><p>vue-cli：vue脚手架，基于此可以快速搭建vue项目</p>
-<p>vuex：全局状态管理框架</p>
-<p>vue-router：路由</p>
-<p>axios：http框架，和后端接口交互</p>
-<p>element-ui ：基于vue的UI组件库，由饿了么开发；另外还有阿里的 ant-design-vue等组件库</p>
-<h2 id="参考项目"><a href="#参考项目" class="headerlink" title="参考项目"></a>参考项目</h2><p>在GitHub&#x2F;Gitee 找到了两个开源项目，以此作为参考足以继续下面的文库前端开发</p>
-<h3 id="vue-element-ui"><a href="#vue-element-ui" class="headerlink" title="vue-element-ui"></a>vue-element-ui</h3><p>源码地址：<br>GitHub：<a href="https://github.com/PanJiaChen/vue-element-admin">https://github.com/PanJiaChen/vue-element-admin</a><br>Gitee：<a href="https://gitee.com/panjiachen/vue-element-admin">https://gitee.com/panjiachen/vue-element-admin</a></p>
-<p>参考文档：<br><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/">https://panjiachen.github.io/vue-element-admin-site/zh/guide/</a></p>
-<h3 id="mall-admin-web"><a href="#mall-admin-web" class="headerlink" title="mall-admin-web"></a>mall-admin-web</h3><p>源码地址：<br>GitHub：<a href="https://github.com/macrozheng/mall-admin-web">https://github.com/macrozheng/mall-admin-web</a><br>Gitee: <a href="https://gitee.com/macrozheng/mall-admin-web">https://gitee.com/macrozheng/mall-admin-web</a></p>
-<p>参考文档：<br><a href="http://www.macrozheng.com/#/foreword/mall_foreword_01">http://www.macrozheng.com/#/foreword/mall_foreword_01</a></p>
-<h2 id="基于vue-cli脚手架创建项目"><a href="#基于vue-cli脚手架创建项目" class="headerlink" title="基于vue-cli脚手架创建项目"></a>基于vue-cli脚手架创建项目</h2><h3 id="安裝vue-cli"><a href="#安裝vue-cli" class="headerlink" title="安裝vue-cli"></a>安裝vue-cli</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g @vue/cli</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">yarn global add @vue/cli</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>我用的是 vue ui</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vue create my-project</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui</span><br></pre></td></tr></table></figure>
-
-<p>插件安装选择</p>
-<p><img src="/images/vue-cli.png"></p>
-<p>1、router history or hash模式选择，这里我们选择history模式<br>参考文档<br><a href="https://www.cnblogs.com/youngly/p/9324608.html">https://www.cnblogs.com/youngly/p/9324608.html</a><br><a href="https://blog.csdn.net/Gabriel_wei/article/details/89631787">https://blog.csdn.net/Gabriel_wei/article/details/89631787</a></p>
-<p>2、css预处理器选择<br>dart-sass和node-sass选择，这里我们选择的是node-sass，但好像dart-sass更好一点</p>
-]]></content>
-      <categories>
-        <category>大前端</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>element-ui</tag>
-        <tag>axios</tag>
-      </tags>
   </entry>
   <entry>
     <title>文库上传转换功能实现</title>
