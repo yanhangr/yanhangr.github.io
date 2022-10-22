@@ -12,10 +12,10 @@
 <p>2、可以安装图形界面软件，这点类似appstore，但是不在App Store内的软件用它也可以安装；</p>
 <p>3、安装非图形界面软件，比如jdk、maven这些，而且它会自动安装依赖。</p>
 <p>安装方法：由于已经科学上网，所以使用官方文档安装Homebrew即可，或者使用国内镜像安装。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/brew here</span></span><br><span class="line">$ <span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/homebrew-core here</span></span><br><span class="line">$ /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/brew here</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/homebrew-core here</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">/bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>&quot;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>安装成功之后，切换为国内镜像，这里我使用的是清华镜像。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换各个源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh 替换 brew bintray 镜像</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew update</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换各个源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh 替换 brew bintray 镜像</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew update</span></span><br></pre></td></tr></table></figure>
 
 <p>homebrew常用命令</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#命令查看</span></span><br><span class="line">$ brew <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询可安装软件</span></span><br><span class="line">$ brew search &lt;xxx&gt;</span><br><span class="line">或者访问 https://formulae.brew.sh 查看</span><br><span class="line"><span class="comment">#禁止自动更新已安装软件</span></span><br><span class="line">$ vi ~/.zshrc</span><br><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=<span class="literal">true</span> <span class="comment">#禁止自动更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装依赖</span></span><br><span class="line">$ brew deps --installed --tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#清除缓存及过期软件</span></span><br><span class="line">$ brew cleanup</span><br><span class="line">有部分缓存仍然清除不掉，可以到目录下手动清除 ～/Library/Caches/homebrew</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装到依赖关系</span></span><br><span class="line">$ brew deps -n maven</span><br><span class="line">n表示几层依赖</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装去除依赖</span></span><br><span class="line"><span class="comment">#假设安装maven，不再安装依赖jdk</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure>
@@ -102,8 +102,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
 <p>其他命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker container <span class="built_in">exec</span> -it containId /bin/bash <span class="comment">#进入容器</span></span><br><span class="line">$ docker ps -a  <span class="comment">#查看运行的容器</span></span><br><span class="line">$ docker stop container containId <span class="comment">#停容器</span></span><br><span class="line">$ docker <span class="built_in">rm</span> container containId  <span class="comment">#删除容器</span></span><br><span class="line">$ docker images <span class="comment">#查看当前docker的镜像</span></span><br><span class="line">$ docker rmi image imageId <span class="comment">#删除镜像</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker container <span class="built_in">exec</span> -it &lt;containId&gt; /bin/bash <span class="comment">#进入容器</span></span><br><span class="line">$ docker ps -a  <span class="comment">#查看运行的容器</span></span><br><span class="line">$ docker stop container containId <span class="comment">#停容器</span></span><br><span class="line">$ docker <span class="built_in">rm</span> container containId  <span class="comment">#删除容器</span></span><br><span class="line">$ docker images <span class="comment">#查看当前docker的镜像</span></span><br><span class="line">$ docker rmi image imageId <span class="comment">#删除镜像</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -116,7 +115,8 @@
   <entry>
     <title>Docker安装Mysql</title>
     <url>/docker%E5%AE%89%E8%A3%85mysql/</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里是mysql 8</p>
+    <content><![CDATA[<p>拉取镜像</p>
+<p>默认拉取最新的稳定版本，我这里是mysql 8</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql</span><br></pre></td></tr></table></figure>
 <p>指定拉取版本</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql:5.6</span><br></pre></td></tr></table></figure>
@@ -138,7 +138,6 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">rm</span> -f b858438722c5</span><br></pre></td></tr></table></figure>
 
 <h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it mysql /bin/bash</span><br></pre></td></tr></table></figure>
-
 
 ]]></content>
       <categories>
@@ -526,6 +525,51 @@
         <tag>Java</tag>
         <tag>disruptor</tag>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac快捷键</title>
+    <url>/mac%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="截屏"><a href="#截屏" class="headerlink" title="截屏"></a>截屏</h2><p>打开截录屏工具  Shift+Command+5</p>
+<p>选择截屏  Shift+Command+4</p>
+<p><a href="https://support.apple.com/zh-cn/guide/mac-help/mh26782/mac">https://support.apple.com/zh-cn/guide/mac-help/mh26782/mac</a></p>
+]]></content>
+      <categories>
+        <category>mac</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacOS安装docker</title>
+    <url>/MacOS%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[<p>系统简介：Apple Silicon(M1pro)  macOS monterey 12.6   32g内存</p>
+<h3 id="安装方案"><a href="#安装方案" class="headerlink" title="安装方案"></a>安装方案</h3><p>​		在macOS使用docker，大概有3种方案</p>
+<h4 id="安装Linux虚机再安装docker"><a href="#安装Linux虚机再安装docker" class="headerlink" title="安装Linux虚机再安装docker"></a>安装Linux虚机再安装docker</h4><p>​		在mac安装虚机一般使用Parallel Desktop，然后安装liunx虚机之后再去安装docker</p>
+<p>不过Parallel Desktop是付费软件。</p>
+<h4 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker desktop"></a>docker desktop</h4><p>​		使用homebrew安装 brew install docker。据说，docker desktop占用资源较多，这里我们先不考虑</p>
+<h4 id="基于lima使用docker"><a href="#基于lima使用docker" class="headerlink" title="基于lima使用docker"></a>基于lima使用docker</h4><p>​		Lima本质上是一个基于<a href="https://www.qemu.org/">QEMU</a>的Linux虚拟机解决方案</p>
+<h3 id="基于lima安装docker"><a href="#基于lima安装docker" class="headerlink" title="基于lima安装docker"></a>基于lima安装docker</h3><h4 id="安装lima"><a href="#安装lima" class="headerlink" title="安装lima"></a>安装lima</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install lima</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装期间因缺少依赖会报错，使用brew install安装即可</span></span><br><span class="line">Error: No such file or directory @ rb_sysopen - /Users/yanhangr/Library/Caches/Homebrew/downloads/64c0acb2789c8720a31321e4d9452be60a04e728738e0c4d2bd74c4d26e847d4--libssh-0.10.0.arm64_monterey.bottle.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install libssh</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="启动lima"><a href="#启动lima" class="headerlink" title="启动lima"></a>启动lima</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --list-templates      <span class="comment"># 查看模板列表</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> /opt/homebrew/share/lima/examples <span class="comment">#模板具体配置</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=default template://default</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">选择执行创建一个default的实例，lima会自动下载vm镜像和启动虚机</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建成功会看到 INFO[0065] READY. Run `lima` to open the shell.</span>  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl list                        <span class="comment"># 查看实例运行状态</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl copy default:/etc/ dst:/etc <span class="comment"># 跨实例复制文件</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl delete default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl prune <span class="comment">#清缓存,即删除目录</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="虚机内对容器操作"><a href="#虚机内对容器操作" class="headerlink" title="虚机内对容器操作"></a>虚机内对容器操作</h4><p>lima nerdctl是一个组合命令，前半段lima代表虚拟机层面的操作，其实lima是完整命令limactl shell default的简写，这段命令的含义是在虚拟机”default”中执行命令。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima <span class="comment">#执行进入虚机</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">nerdctl ps <span class="comment">#查看镜像</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">nerdctl <span class="built_in">exec</span> -it &lt;<span class="built_in">id</span>&gt; /bin/bash <span class="comment">#进入容器</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">不进入虚机执行</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima nerdctl ps</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima nerdctl -it &lt;<span class="built_in">id</span>&gt; /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="基于lima安装docker-1"><a href="#基于lima安装docker-1" class="headerlink" title="基于lima安装docker"></a>基于lima安装docker</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=docker template://docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl shell docker <span class="comment">#进入虚机，然后使用docker命令即可</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps <span class="comment">#这里可以使用docker正常命令</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动停止docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start docker</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于lima安装常用开发软件"><a href="#基于lima安装常用开发软件" class="headerlink" title="基于lima安装常用开发软件"></a>基于lima安装常用开发软件</h3><p>以下均基于docker(template:&#x2F;&#x2F;docker)去安装</p>
+<h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><h4 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h4><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://github.com/lima-vm/lima#getting-started%EF%BC%88%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%EF%BC%89">https://github.com/lima-vm/lima#getting-started（官方文档）</a></p>
+<p>2、<a href="https://chennima.github.io/lima-alternative-docker-desktop-for-mac">https://chennima.github.io/lima-alternative-docker-desktop-for-mac</a></p>
+<p>3、<a href="https://dockerbook.tw/docs/alternatives/lima/">https://dockerbook.tw/docs/alternatives/lima/</a></p>
+<p>4、<a href="https://z.itpub.net/article/detail/FE826C8D74DACC49C1F8B52EB0CD9A5D">https://z.itpub.net/article/detail/FE826C8D74DACC49C1F8B52EB0CD9A5D</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
       </tags>
   </entry>
 </search>
