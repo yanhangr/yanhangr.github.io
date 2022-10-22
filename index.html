@@ -150,18 +150,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -198,6 +198,123 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/mac%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="yanhangr">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mac%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">mac软件安装</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-22 15:30:15 / 修改时间：16:16:33" itemprop="dateCreated datePublished" datetime="2022-10-22T15:30:15+08:00">2022-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>mbp(m1pro 10核+32g+512g )，安装一些常用的软件，主要用于日常学习及软件开发</p>
+<h2 id="clashX"><a href="#clashX" class="headerlink" title="clashX"></a>clashX</h2><p>科学上网工具</p>
+<p>下载安装地址 <a target="_blank" rel="noopener" href="https://github.com/yichengchen/clashX/releases">https://github.com/yichengchen/clashX/releases</a></p>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>mac软件安装及管理利器，它远比AppStore强大，官方文档 ： <a target="_blank" rel="noopener" href="https://docs.brew.sh./">https://docs.brew.sh。</a></p>
+<p>几个重要功能：</p>
+<p>1、安装源来自官网；</p>
+<p>2、可以安装图形界面软件，这点类似appstore，但是不在App Store内的软件用它也可以安装；</p>
+<p>3、安装非图形界面软件，比如jdk、maven这些，而且它会自动安装依赖。</p>
+<p>安装方法：由于已经科学上网，所以使用官方文档安装Homebrew即可，或者使用国内镜像安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/brew here</span></span><br><span class="line">$ <span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/homebrew-core here</span></span><br><span class="line">$ /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>安装成功之后，切换为国内镜像，这里我使用的是清华镜像。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换各个源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh 替换 brew bintray 镜像</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew update</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>homebrew常用命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#命令查看</span></span><br><span class="line">$ brew <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询可安装软件</span></span><br><span class="line">$ brew search &lt;xxx&gt;</span><br><span class="line">或者访问 https://formulae.brew.sh 查看</span><br><span class="line"><span class="comment">#禁止自动更新已安装软件</span></span><br><span class="line">$ vi ~/.zshrc</span><br><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=<span class="literal">true</span> <span class="comment">#禁止自动更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装依赖</span></span><br><span class="line">$ brew deps --installed --tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#清除缓存及过期软件</span></span><br><span class="line">$ brew cleanup</span><br><span class="line">有部分缓存仍然清除不掉，可以到目录下手动清除 ～/Library/Caches/homebrew</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装到依赖关系</span></span><br><span class="line">$ brew deps -n maven</span><br><span class="line">n表示几层依赖</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装去除依赖</span></span><br><span class="line"><span class="comment">#假设安装maven，不再安装依赖jdk</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure>
+
+<p>下面绝大部分软件的安装均可以使用homebrew来完成安装，如果需要特殊安装会特别标注</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>用默认的safari，感觉比chrome省电</p>
+<h2 id="productivity-software"><a href="#productivity-software" class="headerlink" title="productivity software"></a>productivity software</h2><ol>
+<li>alfred  快速检索</li>
+<li>rectangle 分屏软件</li>
+</ol>
+<h2 id="dev-env"><a href="#dev-env" class="headerlink" title="dev-env"></a>dev-env</h2><ol>
+<li><p>jdk 1.8</p>
+<p>Apple Silicon安装指定版本jdk </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install --cask homebrew/cask-versions/zulu8</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置环境变量</span></span><br><span class="line">$ vi ～/.zshrc </span><br><span class="line">$ <span class="built_in">export</span> JAVA_HOME=$(/usr/libexec/java_home -v1.8)</span><br><span class="line">$ <span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>postman</p>
+<p>接口测试软件</p>
+</li>
+<li><p>intellij-idea-ce</p>
+<p>社区版idea</p>
+</li>
+<li><p>maven</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#maven安装依赖jdk，这里忽略依赖安装</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1029,95 +1146,6 @@
 <p>数据库字段<br>1、增加 文件夹前缀，文件夹相对路径，转换完成时间，转换所处状态，转换失败原因</p>
 <p>测试case<br>1、上传“文件x”，不存在相同文档，然后进入审核阶段；此时再有人上传”文件X”,也应该提醒已经存在相同文档！<br>看我的文库如何解决</p>
 <p>后续优化问题<br>1、优化disruptor 队列处理</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/springboot%E6%95%B4%E5%90%88log4j2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="yanhangr">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanhangr">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | yanhangr">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/springboot%E6%95%B4%E5%90%88log4j2/" class="post-title-link" itemprop="url">springboot--log4j2配置学习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-10-02 22:20:30" itemprop="dateCreated datePublished" datetime="2019-10-02T22:20:30+08:00">2019-10-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-12 19:33:16" itemprop="dateModified" datetime="2022-10-12T19:33:16+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/spring-boot/" itemprop="url" rel="index"><span itemprop="name">spring boot</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/">https://michael728.github.io/2019/08/10/java-spring-boot-log4j2/</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA">https://github.com/alibaba/druid/wiki/Druid%E4%B8%AD%E4%BD%BF%E7%94%A8log4j2%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html">https://www.cnblogs.com/xishuai/p/spring-boot-log4j2.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keeya/p/10101547.html">https://www.cnblogs.com/keeya/p/10101547.html</a></p>
-<p><a target="_blank" rel="noopener" href="http://dkylin.com/archives/2017/spring-boot-log4j2-config.html">http://dkylin.com/archives/2017/spring-boot-log4j2-config.html</a></p>
 
       
     </div>

@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hello elasticsearch</title>
-    <url>/hello-elasticsearch/</url>
-    <content><![CDATA[<p>日常工作主要是基于elasticsearch的垂直领域搜索功能开发，这里打算出个专题介绍如何通过ES来打造一个完整的搜索。<br>由于ES版本更新比较快，目前在写博客的时候已经到了7.12.0，这里也采用最新的版本来介绍。<br>大概分为以下三个模块来学习：ES基础、搜索、生产实战、源码分析</p>
-<h2 id="ES基础"><a href="#ES基础" class="headerlink" title="ES基础"></a>ES基础</h2><p>1、ES的安装和配置<br>&#x3D;&#x3D;&gt;<a href="https://yanhangr.github.io/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">使用docker安装elasticsearch集群</a><br>2、基本概念<br>mapping和setting<br>3、ES集群的查询和写入逻辑<br>4、query<br>5、aggregation<br>6、analysis<br>7、运维和监控</p>
-<h2 id="ES搜索"><a href="#ES搜索" class="headerlink" title="ES搜索"></a>ES搜索</h2><p>1、ES插件开发(基于hanlp的分词插件)<br>2、智能纠错<br>3、联想词</p>
-<h2 id="生产实战"><a href="#生产实战" class="headerlink" title="生产实战"></a>生产实战</h2><p>1、ES多活灾备<br>2、ES多种写入方式<br>3、基于Java注解的mapping生成工具<br>4、多集群多索引的通用写入查询功能<br>5、大数据量下的写入查询优化</p>
-<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
+    <title>mac软件安装</title>
+    <url>/mac%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>mbp(m1pro 10核+32g+512g )，安装一些常用的软件，主要用于日常学习及软件开发</p>
+<h2 id="clashX"><a href="#clashX" class="headerlink" title="clashX"></a>clashX</h2><p>科学上网工具</p>
+<p>下载安装地址 <a href="https://github.com/yichengchen/clashX/releases">https://github.com/yichengchen/clashX/releases</a></p>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>mac软件安装及管理利器，它远比AppStore强大，官方文档 ： <a href="https://docs.brew.sh./">https://docs.brew.sh。</a></p>
+<p>几个重要功能：</p>
+<p>1、安装源来自官网；</p>
+<p>2、可以安装图形界面软件，这点类似appstore，但是不在App Store内的软件用它也可以安装；</p>
+<p>3、安装非图形界面软件，比如jdk、maven这些，而且它会自动安装依赖。</p>
+<p>安装方法：由于已经科学上网，所以使用官方文档安装Homebrew即可，或者使用国内镜像安装。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/brew here</span></span><br><span class="line">$ <span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;...&quot;</span>  <span class="comment"># put your Git mirror of Homebrew/homebrew-core here</span></span><br><span class="line">$ /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>安装成功之后，切换为国内镜像，这里我使用的是清华镜像。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换各个源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git -C <span class="string">&quot;<span class="subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zsh 替换 brew bintray 镜像</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">source</span> ~/.zshrc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新源</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew update</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>homebrew常用命令</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#命令查看</span></span><br><span class="line">$ brew <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询可安装软件</span></span><br><span class="line">$ brew search &lt;xxx&gt;</span><br><span class="line">或者访问 https://formulae.brew.sh 查看</span><br><span class="line"><span class="comment">#禁止自动更新已安装软件</span></span><br><span class="line">$ vi ~/.zshrc</span><br><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=<span class="literal">true</span> <span class="comment">#禁止自动更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装依赖</span></span><br><span class="line">$ brew deps --installed --tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#清除缓存及过期软件</span></span><br><span class="line">$ brew cleanup</span><br><span class="line">有部分缓存仍然清除不掉，可以到目录下手动清除 ～/Library/Caches/homebrew</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装到依赖关系</span></span><br><span class="line">$ brew deps -n maven</span><br><span class="line">n表示几层依赖</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装去除依赖</span></span><br><span class="line"><span class="comment">#假设安装maven，不再安装依赖jdk</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure>
+
+<p>下面绝大部分软件的安装均可以使用homebrew来完成安装，如果需要特殊安装会特别标注</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>用默认的safari，感觉比chrome省电</p>
+<h2 id="productivity-software"><a href="#productivity-software" class="headerlink" title="productivity software"></a>productivity software</h2><ol>
+<li>alfred  快速检索</li>
+<li>rectangle 分屏软件</li>
+</ol>
+<h2 id="dev-env"><a href="#dev-env" class="headerlink" title="dev-env"></a>dev-env</h2><ol>
+<li><p>jdk 1.8</p>
+<p>Apple Silicon安装指定版本jdk </p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew install --cask homebrew/cask-versions/zulu8</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#设置环境变量</span></span><br><span class="line">$ vi ～/.zshrc </span><br><span class="line">$ <span class="built_in">export</span> JAVA_HOME=$(/usr/libexec/java_home -v1.8)</span><br><span class="line">$ <span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>postman</p>
+<p>接口测试软件</p>
+</li>
+<li><p>intellij-idea-ce</p>
+<p>社区版idea</p>
+</li>
+<li><p>maven</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#maven安装依赖jdk，这里忽略依赖安装</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
-        <category>elasticsearch</category>
+        <category>mac</category>
       </categories>
       <tags>
-        <tag>搜索</tag>
-        <tag>elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mysql--数据库字段</title>
-    <url>/Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/</url>
-    <content><![CDATA[<h2 id="数据库字段规范"><a href="#数据库字段规范" class="headerlink" title="数据库字段规范"></a>数据库字段规范</h2><h3 id="主键ID-（unsigned-int-自增）"><a href="#主键ID-（unsigned-int-自增）" class="headerlink" title="主键ID （unsigned int 自增）"></a>主键ID （unsigned int 自增）</h3><p>可存储0 ~ 4294967295之间，占4个字节（byte），32位；单表最大可存储42亿数据完全够用<br>相比 unsigned bigint完全用不上，占用空间又大，其实单表超过千万条数据，就应该分表了</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
+        <tag>mac</tag>
       </tags>
   </entry>
   <entry>
@@ -93,37 +114,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用docker安装elasticsearch集群</title>
-    <url>/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
-
-<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
-<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
-<p>其中user为elasticsearch的启动用户</p>
-<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
-<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
-<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
-<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
-]]></content>
-      <categories>
-        <category>elasticsearch</category>
-      </categories>
-      <tags>
-        <tag>elasticsearch</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker安装Mysql</title>
     <url>/docker%E5%AE%89%E8%A3%85mysql/</url>
     <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里是mysql 8</p>
@@ -160,29 +150,63 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo迁移</title>
-    <url>/hexo%E8%BF%81%E7%A7%BB/</url>
-    <content><![CDATA[<p>背景：之前hexo是在windows上编写，这里将hexo迁移到mac</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>前置安装homebrew，可以参考文章</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装nodejs</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建目录</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装hexo，局部安装的好处是可以使得不同目录安装不同的版本</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装需要使用命令 npx hexo &lt;<span class="built_in">command</span>&gt;</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init yanhangr.github.io</span></span><br></pre></td></tr></table></figure>
+    <title>使用docker安装elasticsearch集群</title>
+    <url>/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>默认拉取最新的稳定版本，我这里指定7.12.0版本的ES集群</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
 
-<h2 id="迁移必要文件"><a href="#迁移必要文件" class="headerlink" title="迁移必要文件"></a>迁移必要文件</h2><p>复制win下的hexo部分文件到你Mac刚初始化的yanhangr.github.io下</p>
-<p>必须复制文件夹：scaffolds，source</p>
-<p>可选复制 _config.yml，themes</p>
-<p>配置和主题这两个目录可能因为版本原因，不再支持你在mac新安装的hexo版本，可以不用复制，稍后再配置这两项即可</p>
-<h2 id="github推送配置"><a href="#github推送配置" class="headerlink" title="github推送配置"></a>github推送配置</h2><p>修改yanhangr.github.io根目录下配置_config.yml</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;project&gt;</span><br><span class="line">  branch: master </span><br></pre></td></tr></table></figure>
+<h2 id="虚机配置"><a href="#虚机配置" class="headerlink" title="虚机配置"></a>虚机配置</h2><h3 id="设置vm-max-map-count"><a href="#设置vm-max-map-count" class="headerlink" title="设置vm_max_map_count"></a>设置vm_max_map_count</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+<h3 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h3><p>设置缘由：<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/important-configuration-changes.html">官方文档</a><br>方法一：在elasticsearch.yml配置如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bootstrap.memory_lock: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>并添加以下两行到&#x2F;etc&#x2F;security&#x2F;limits.conf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ user soft memlock unlimited</span><br><span class="line">$ user hard memlock unlimited</span><br></pre></td></tr></table></figure>
+<p>其中user为elasticsearch的启动用户</p>
+<p>方法二：<br>修改&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
+<h2 id="docker配置文件"><a href="#docker配置文件" class="headerlink" title="docker配置文件"></a>docker配置文件</h2><p>创建 docker-compose.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms768m -Xmx768m&quot;</span></span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+<p>注：<br>(1) ES_JAVA_OPTS(es堆内存设置)<br>宿主机内存大小的一半和31GB，取最小值<br>(2) volumes(挂载卷)<br>对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<h2 id="log配置"><a href="#log配置" class="headerlink" title="log配置"></a>log配置</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npx hexo d</span><br><span class="line"><span class="comment">#报错如下</span></span><br><span class="line">remote: Support <span class="keyword">for</span> password authentication was removed on August 13, 2021.</span><br><span class="line"></span><br><span class="line"><span class="comment">#解决途径，&lt;token&gt;使用github的personal access token替代，可以配置具体权限和期限</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://&lt;token&gt;@github.com/yanhangr/yanhangr.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
 
-<p>github配置personal access token路径，如下图</p>
-<p><img src="/images/hexo/personal_access_token.png" alt="personal_access_token"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/docker.html</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/configuring-tls-docker.html</a></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>elasticsearch</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>docker</tag>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hello elasticsearch</title>
+    <url>/hello-elasticsearch/</url>
+    <content><![CDATA[<p>日常工作主要是基于elasticsearch的垂直领域搜索功能开发，这里打算出个专题介绍如何通过ES来打造一个完整的搜索。<br>由于ES版本更新比较快，目前在写博客的时候已经到了7.12.0，这里也采用最新的版本来介绍。<br>大概分为以下三个模块来学习：ES基础、搜索、生产实战、源码分析</p>
+<h2 id="ES基础"><a href="#ES基础" class="headerlink" title="ES基础"></a>ES基础</h2><p>1、ES的安装和配置<br>&#x3D;&#x3D;&gt;<a href="https://yanhangr.github.io/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">使用docker安装elasticsearch集群</a><br>2、基本概念<br>mapping和setting<br>3、ES集群的查询和写入逻辑<br>4、query<br>5、aggregation<br>6、analysis<br>7、运维和监控</p>
+<h2 id="ES搜索"><a href="#ES搜索" class="headerlink" title="ES搜索"></a>ES搜索</h2><p>1、ES插件开发(基于hanlp的分词插件)<br>2、智能纠错<br>3、联想词</p>
+<h2 id="生产实战"><a href="#生产实战" class="headerlink" title="生产实战"></a>生产实战</h2><p>1、ES多活灾备<br>2、ES多种写入方式<br>3、基于Java注解的mapping生成工具<br>4、多集群多索引的通用写入查询功能<br>5、大数据量下的写入查询优化</p>
+<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql--数据库字段</title>
+    <url>/Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/</url>
+    <content><![CDATA[<h2 id="数据库字段规范"><a href="#数据库字段规范" class="headerlink" title="数据库字段规范"></a>数据库字段规范</h2><h3 id="主键ID-（unsigned-int-自增）"><a href="#主键ID-（unsigned-int-自增）" class="headerlink" title="主键ID （unsigned int 自增）"></a>主键ID （unsigned int 自增）</h3><p>可存储0 ~ 4294967295之间，占4个字节（byte），32位；单表最大可存储42亿数据完全够用<br>相比 unsigned bigint完全用不上，占用空间又大，其实单表超过千万条数据，就应该分表了</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -207,6 +231,32 @@
 
 <h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#相对路径插入图片，图片放在source/images</span></span><br><span class="line">![图片名称](/images/pictureName.png)</span><br><span class="line"><span class="comment">#图片可以放在文章所在的目录中，需要先在hexo目录下的配置文件_config.yml中修改为post_asset_folder: true 执行命令$ hexo new article_name，在source/_posts中会生成文章article_name.md和同名文件夹article_name。将图片资源放在article_name文件夹中，文章就可以使用相对路径引用图片资源了。</span></span><br><span class="line">![图片名称](pictureName.png)</span><br><span class="line"><span class="comment">#网络图片引用</span></span><br><span class="line">![图片标签](图片网络地址)</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo迁移</title>
+    <url>/hexo%E8%BF%81%E7%A7%BB/</url>
+    <content><![CDATA[<p>背景：之前hexo是在windows上编写，这里将hexo迁移到mac</p>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>前置安装homebrew，可以参考文章</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装nodejs</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建目录</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装hexo，局部安装的好处是可以使得不同目录安装不同的版本</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">局部安装需要使用命令 npx hexo &lt;<span class="built_in">command</span>&gt;</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化hexo</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init yanhangr.github.io</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迁移必要文件"><a href="#迁移必要文件" class="headerlink" title="迁移必要文件"></a>迁移必要文件</h2><p>复制win下的hexo部分文件到你Mac刚初始化的yanhangr.github.io下</p>
+<p>必须复制文件夹：scaffolds，source</p>
+<p>可选复制 _config.yml，themes</p>
+<p>配置和主题这两个目录可能因为版本原因，不再支持你在mac新安装的hexo版本，可以不用复制，稍后再配置这两项即可</p>
+<h2 id="github推送配置"><a href="#github推送配置" class="headerlink" title="github推送配置"></a>github推送配置</h2><p>修改yanhangr.github.io根目录下配置_config.yml</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;project&gt;</span><br><span class="line">  branch: master </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npx hexo d</span><br><span class="line"><span class="comment">#报错如下</span></span><br><span class="line">remote: Support <span class="keyword">for</span> password authentication was removed on August 13, 2021.</span><br><span class="line"></span><br><span class="line"><span class="comment">#解决途径，&lt;token&gt;使用github的personal access token替代，可以配置具体权限和期限</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://&lt;token&gt;@github.com/yanhangr/yanhangr.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>github配置personal access token路径，如下图</p>
+<p><img src="/images/hexo/personal_access_token.png" alt="personal_access_token"></p>
 ]]></content>
       <categories>
         <category>hexo</category>
