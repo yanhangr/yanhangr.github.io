@@ -13,12 +13,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"Style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="之前写过简单爬虫，主要用了BeautifulSoup4、request等模块。现在开始学习爬虫框架scrapy，作为记录使用，有错误欢迎反馈。(ps:没开始写之前，简单用了一下，真的很好用啊)">
 <meta property="og:type" content="article">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Epython3-7%E5%BC%80%E5%8F%91%EF%BC%88%E7%9B%AE%E5%89%8D%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">基于python3.7开发（目前最新版本）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9Apycharm-%EF%BC%88%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8IDEA%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">编辑器：pycharm （习惯使用IDEA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%BA%93%EF%BC%9Aanaconda%EF%BC%88%E8%A7%A3%E5%86%B3%E5%90%84%E7%A7%8D%E5%8C%85%E7%9A%84%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">功能库：anaconda（解决各种包的依赖问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E7%A4%BE%E5%8C%BA%E3%80%81%E6%96%87%E6%A1%A3-%E9%87%8D%E8%A6%81%E5%95%8A%EF%BC%81%EF%BC%81%EF%BC%81-%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">官方社区、文档(重要啊！！！)：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85scrapy"><span class="nav-number">2.</span> <span class="nav-text">安装scrapy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85scrapy"><span class="nav-number">2.1.</span> <span class="nav-text">查看是否已经安装scrapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2conda%E6%94%AF%E6%8C%81%E7%9A%84scrapy%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">查询conda支持的scrapy版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">执行安装</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Epython3-7%E5%BC%80%E5%8F%91%EF%BC%88%E7%9B%AE%E5%89%8D%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-text">基于python3.7开发（目前最新版本）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9Apycharm-%EF%BC%88%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8IDEA%EF%BC%89"><span class="nav-text">编辑器：pycharm （习惯使用IDEA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%BA%93%EF%BC%9Aanaconda%EF%BC%88%E8%A7%A3%E5%86%B3%E5%90%84%E7%A7%8D%E5%8C%85%E7%9A%84%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-text">功能库：anaconda（解决各种包的依赖问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E7%A4%BE%E5%8C%BA%E3%80%81%E6%96%87%E6%A1%A3-%E9%87%8D%E8%A6%81%E5%95%8A%EF%BC%81%EF%BC%81%EF%BC%81-%EF%BC%9A"><span class="nav-text">官方社区、文档(重要啊！！！)：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85scrapy"><span class="nav-text">安装scrapy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85scrapy"><span class="nav-text">查看是否已经安装scrapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2conda%E6%94%AF%E6%8C%81%E7%9A%84scrapy%E7%89%88%E6%9C%AC"><span class="nav-text">查询conda支持的scrapy版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="nav-text">执行安装</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -329,7 +329,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

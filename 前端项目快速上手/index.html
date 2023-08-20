@@ -13,12 +13,12 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"Style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="最近在做类百度文库系统，这次需要自己写前端….; 作为一枚后端开发工程师，为了搭建前端系统，这里快速学习一下可能会涉及到的前端技术。 前端术语前端三驾马车html、css、js html负责前端结构；css负责前端展现样式；js负责前端动态功能；html是主体，装载各种dom元素；css用来装饰dom元素；javascript控制dom元素。ES5&#x2F;ES6是指JS的ECMAScript，">
 <meta property="og:type" content="article">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">前端术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6"><span class="nav-number">1.0.1.</span> <span class="nav-text">前端三驾马车</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-js%E3%80%81npm%E3%80%81webpack"><span class="nav-number">1.0.2.</span> <span class="nav-text">node.js、npm、webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue"><span class="nav-number">1.0.3.</span> <span class="nav-text">vue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue%E6%B6%89%E5%8F%8A%E6%8A%80%E6%9C%AF"><span class="nav-number">2.</span> <span class="nav-text">vue涉及技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">参考项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-element-ui"><span class="nav-number">3.1.</span> <span class="nav-text">vue-element-ui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mall-admin-web"><span class="nav-number">3.2.</span> <span class="nav-text">mall-admin-web</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Evue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">基于vue-cli脚手架创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9Dvue-cli"><span class="nav-number">4.1.</span> <span class="nav-text">安裝vue-cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.2.</span> <span class="nav-text">创建项目</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%9C%AF%E8%AF%AD"><span class="nav-text">前端术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6"><span class="nav-text">前端三驾马车</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-js%E3%80%81npm%E3%80%81webpack"><span class="nav-text">node.js、npm、webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue"><span class="nav-text">vue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue%E6%B6%89%E5%8F%8A%E6%8A%80%E6%9C%AF"><span class="nav-text">vue涉及技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE"><span class="nav-text">参考项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-element-ui"><span class="nav-text">vue-element-ui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mall-admin-web"><span class="nav-text">mall-admin-web</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Evue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">基于vue-cli脚手架创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9Dvue-cli"><span class="nav-text">安裝vue-cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">创建项目</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,18 +160,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -322,8 +322,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/" rel="prev" title="Mysql--数据库字段">
-                  <i class="fa fa-chevron-left"></i> Mysql--数据库字段
+                <a href="/%E6%96%87%E5%BA%93%E4%B8%8A%E4%BC%A0%E8%BD%AC%E6%8D%A2%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/" rel="prev" title="文库上传转换功能实现">
+                  <i class="fa fa-chevron-left"></i> 文库上传转换功能实现
                 </a>
             </div>
             <div class="post-nav-item">
@@ -350,7 +350,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"Style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在macOS Apple Silicon(M1pro) 上，基于lima-docker采取 docker-compose 的方式来进行部署 进入lima-docker通过Mac terminal 1$ limactl shell docker  拉取镜像其他版本自己设定 1$ docker pull arm64v8&#x2F;elasticsearch:7.12.0  安装前配置文件描述符设置设置目的：因为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于lima-docker安装elasticsearch集群">
+<meta property="og:url" content="http://example.com/%E5%9F%BA%E4%BA%8Elima-docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:site_name" content="yanhangr">
+<meta property="og:description" content="在macOS Apple Silicon(M1pro) 上，基于lima-docker采取 docker-compose 的方式来进行部署 进入lima-docker通过Mac terminal 1$ limactl shell docker  拉取镜像其他版本自己设定 1$ docker pull arm64v8&#x2F;elasticsearch:7.12.0  安装前配置文件描述符设置设置目的：因为">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-12T15:15:23.401Z">
+<meta property="article:modified_time" content="2023-03-08T10:48:48.417Z">
+<meta property="article:author" content="yanhangr">
+<meta property="article:tag" content="mac">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="lima">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/%E5%9F%BA%E4%BA%8Elima-docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/%E5%9F%BA%E4%BA%8Elima-docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/","path":"基于lima-docker安装elasticsearch集群/","title":"基于lima-docker安装elasticsearch集群"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于lima-docker安装elasticsearch集群 | yanhangr</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yanhangr</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5lima-docker"><span class="nav-text">进入lima-docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-text">拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E9%85%8D%E7%BD%AE"><span class="nav-text">安装前配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%AE%BE%E7%BD%AE"><span class="nav-text">文件描述符设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vm-max-map-count%E8%AE%BE%E7%BD%AE"><span class="nav-text">vm_max_map_count设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#disable-swapping"><span class="nav-text">disable swapping</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml"><span class="nav-text">docker-compose.yml</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Es7-12%E7%89%88%E6%9C%AC"><span class="nav-text">Es7.12版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es-kibana-7-14%E7%89%88%E6%9C%AC"><span class="nav-text">es+kibana 7.14版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es-kibana-8-5%E7%89%88%E6%9C%AC"><span class="nav-text">es+kibana 8.5版本</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yanhangr"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">yanhangr</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yanhangr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yanhangr" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yanhangr@163.com" title="E-Mail → mailto:yanhangr@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%9F%BA%E4%BA%8Elima-docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="yanhangr">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基于lima-docker安装elasticsearch集群 | yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于lima-docker安装elasticsearch集群
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-12 23:15:23" itemprop="dateCreated datePublished" datetime="2022-11-12T23:15:23+08:00">2022-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-08 18:48:48" itemprop="dateModified" datetime="2023-03-08T18:48:48+08:00">2023-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在macOS Apple Silicon(M1pro) 上，基于lima-docker采取 docker-compose 的方式来进行部署</p>
+<h3 id="进入lima-docker"><a href="#进入lima-docker" class="headerlink" title="进入lima-docker"></a>进入lima-docker</h3><p>通过Mac terminal</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl shell docker</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>其他版本自己设定</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull arm64v8/elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装前配置"><a href="#安装前配置" class="headerlink" title="安装前配置"></a>安装前配置</h3><h4 id="文件描述符设置"><a href="#文件描述符设置" class="headerlink" title="文件描述符设置"></a>文件描述符设置</h4><p>设置目的：因为es会用到大量的文件描述符和文件句柄，Linux默认1024，如果文件描述符用完，会导致数据丢失</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看文件描述符限制，默认是1024</span></span><br><span class="line">$ <span class="built_in">ulimit</span> -n</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改文件描述符</span></span><br><span class="line"><span class="comment">#临时修改，仅在当前session生效</span></span><br><span class="line">$ sudo su  </span><br><span class="line">$ <span class="built_in">ulimit</span> -n 65535 </span><br><span class="line">$ su yanhangr</span><br><span class="line"></span><br><span class="line"><span class="comment">#永久生效</span></span><br><span class="line">$ vi /etc/security/limits.conf</span><br><span class="line"><span class="comment">#添加行,设置最大描述符65535，yanhangr表示用户名</span></span><br><span class="line">yanhangr  -  nofile  65535</span><br></pre></td></tr></table></figure>
+
+<p>注意：Ubuntu 优先使用init.d而不是limits.conf。这里需要编辑&#x2F;etc&#x2F;pam.d&#x2F;su，确保下面这行“#”不存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># session    required   pam_limits.so</span></span><br></pre></td></tr></table></figure>
+
+<p>官方解释：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/file-descriptors.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/file-descriptors.html</a></p>
+<h4 id="vm-max-map-count设置"><a href="#vm-max-map-count设置" class="headerlink" title="vm_max_map_count设置"></a>vm_max_map_count设置</h4><p>设置目的：Elasticsearch 对各种文件混合使用了 NioFs（ 注：非阻塞文件系统）和 MMapFs （ 注：内存映射文件系统）。请确保你配置的最大映射数量，以便有足够的虚拟内存可用于 mmapped 文件。</p>
+<p>官方解释：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/vm-max-map-count.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/vm-max-map-count.html</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h4><p>设置目的：Linux设置swap的目的是当物理内存不够的时候，将内存不活跃数据转移到磁盘，即你的swap分区，避免oom</p>
+<p>这里有个问题是导致大量的IO，使得性能变差，所以需要关闭swap。</p>
+<p>官方解释：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/setup-configuration-memory.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/setup-configuration-memory.html</a></p>
+<p>关闭swap有3种方法</p>
+<ol>
+<li><p>禁用swap</p>
+<p>临时禁用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo swapoff -a</span><br></pre></td></tr></table></figure>
+
+<p>永久禁用</p>
+<p>编辑&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
+</li>
+<li><p>设置swapni</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.swappiness=1  <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>elasticsearch.yml 设置，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">ulimits:</span><br><span class="line">  memlock:</span><br><span class="line">    soft: -1</span><br><span class="line">    hard: -1</span><br></pre></td></tr></table></figure>
+
+<p>此种方法会导致如下问题，因为无法正常使用ulimits命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error setting rlimits for ready process: error setting rlimit type 8: operation not permitted: unknown</span><br></pre></td></tr></table></figure>
+
+<p>具体原因可能和<a target="_blank" rel="noopener" href="https://github.com/nestybox">nestybox</a>&#x2F;**<a target="_blank" rel="noopener" href="https://github.com/nestybox/sysbox">sysbox</a>**有关系，具体和lima的关系暂时还没有搞清楚</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/nestybox/sysbox/issues/351">https://github.com/nestybox/sysbox/issues/351</a></p>
+<p>Lima-vm默认已禁用swap，所以可以先不检查memory_lock，且不再设置ulimits</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yanhangr@lima-docker:/tmp/lima$ free -h</span><br><span class="line">               total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8Gi       250Mi       3.1Gi       1.0Mi       510Mi       3.4Gi</span><br><span class="line">Swap:             0B          0B          0B</span><br></pre></td></tr></table></figure>
+
+<p>lima-vm关于swap的文档  <a target="_blank" rel="noopener" href="https://github.com/lima-vm/lima/discussions/941">Is swap space configurable? </a></p>
+</li>
+</ol>
+<h3 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h3><h4 id="Es7-12版本"><a href="#Es7-12版本" class="headerlink" title="Es7.12版本"></a>Es7.12版本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic      </span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<p>（1）对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<p>（2）日志配置 <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h4 id="es-kibana-7-14版本"><a href="#es-kibana-7-14版本" class="headerlink" title="es+kibana 7.14版本"></a>es+kibana 7.14版本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic    </span><br><span class="line">  kibana:</span><br><span class="line">		container_name: kibana</span><br><span class="line">    image: arm64v8/kibana:7.14.0</span><br><span class="line">    volumes:</span><br><span class="line">      - ./kibana/data:/usr/share/kibana/data</span><br><span class="line">      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml  </span><br><span class="line">    ports:</span><br><span class="line">      - 5601:5601</span><br><span class="line">    depends_on:</span><br><span class="line">      - es01</span><br><span class="line">      - es02</span><br><span class="line">      - es03</span><br><span class="line">    networks:</span><br><span class="line">      - elastic      </span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>kibana.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ** THIS IS AN AUTO-GENERATED FILE **</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default Kibana configuration for docker target</span></span><br><span class="line">server.host: <span class="string">&quot;0&quot;</span></span><br><span class="line">server.shutdownTimeout: <span class="string">&quot;5s&quot;</span></span><br><span class="line">elasticsearch.hosts: <span class="string">&#x27;[&quot;http://es01:9200&quot;,&quot;http://es02:9201&quot;,&quot;http://es03:9202&quot;]&#x27;</span></span><br><span class="line">monitoring.ui.container.elasticsearch.enabled: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="es-kibana-8-5版本"><a href="#es-kibana-8-5版本" class="headerlink" title="es+kibana 8.5版本"></a>es+kibana 8.5版本</h4><p>.env</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Password for the &#x27;elastic&#x27; user (at least 6 characters)</span></span><br><span class="line">ELASTIC_PASSWORD=<span class="string">&#x27;changeme&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Password for the &#x27;kibana_system&#x27; user (at least 6 characters)</span></span><br><span class="line">KIBANA_PASSWORD=<span class="string">&#x27;changeme&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Version of Elastic products</span></span><br><span class="line">STACK_VERSION=8.5.0</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Set the cluster name</span></span><br><span class="line">CLUSTER_NAME=docker-es-cluster</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Set to &#x27;basic&#x27; or &#x27;trial&#x27; to automatically start the 30-day trial</span></span><br><span class="line">LICENSE=basic</span><br><span class="line"><span class="comment">#LICENSE=trial</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Port to expose Elasticsearch HTTP API to the host</span></span><br><span class="line">ES_PORT=9200</span><br><span class="line"><span class="comment">#ES_PORT=127.0.0.1:9200</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Port to expose Kibana to the host</span></span><br><span class="line">KIBANA_PORT=5601</span><br><span class="line"><span class="comment">#KIBANA_PORT=80</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Increase or decrease based on the available host memory (in bytes)</span></span><br><span class="line">MEM_LIMIT=21474836480</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Project namespace (defaults to the current folder name if not set)</span></span><br><span class="line">COMPOSE_PROJECT_NAME=docker-es-cluster</span><br></pre></td></tr></table></figure>
+
+<p>docker-compose.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&quot;2.2&quot;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  setup:</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">    user: <span class="string">&quot;0&quot;</span></span><br><span class="line">    <span class="built_in">command</span>: &gt;</span><br><span class="line">      bash -c <span class="string">&#x27;</span></span><br><span class="line"><span class="string">        if [ x$&#123;ELASTIC_PASSWORD&#125; == x ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Set the ELASTIC_PASSWORD environment variable in the .env file&quot;;</span></span><br><span class="line"><span class="string">          exit 1;</span></span><br><span class="line"><span class="string">        elif [ x$&#123;KIBANA_PASSWORD&#125; == x ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Set the KIBANA_PASSWORD environment variable in the .env file&quot;;</span></span><br><span class="line"><span class="string">          exit 1;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        if [ ! -f config/certs/ca.zip ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Creating CA&quot;;</span></span><br><span class="line"><span class="string">          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;</span></span><br><span class="line"><span class="string">          unzip config/certs/ca.zip -d config/certs;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        if [ ! -f config/certs/certs.zip ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Creating certs&quot;;</span></span><br><span class="line"><span class="string">          echo -ne \</span></span><br><span class="line"><span class="string">          &quot;instances:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es01\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es01\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es02\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es02\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es03\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es03\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &gt; config/certs/instances.yml;</span></span><br><span class="line"><span class="string">          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;</span></span><br><span class="line"><span class="string">          unzip config/certs/certs.zip -d config/certs;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        echo &quot;Setting file permissions&quot;</span></span><br><span class="line"><span class="string">        chown -R root:root config/certs;</span></span><br><span class="line"><span class="string">        find . -type d -exec chmod 750 \&#123;\&#125; \;;</span></span><br><span class="line"><span class="string">        find . -type f -exec chmod 640 \&#123;\&#125; \;;</span></span><br><span class="line"><span class="string">        echo &quot;Waiting for Elasticsearch availability&quot;;</span></span><br><span class="line"><span class="string">        until curl -s --cacert config/certs/ca/ca.crt https://es01:9200 | grep -q &quot;missing authentication credentials&quot;; do sleep 30; done;</span></span><br><span class="line"><span class="string">        echo &quot;Setting kibana_system password&quot;;</span></span><br><span class="line"><span class="string">        until curl -s -X POST --cacert config/certs/ca/ca.crt -u &quot;elastic:$&#123;ELASTIC_PASSWORD&#125;&quot; -H &quot;Content-Type: application/json&quot; https://es01:9200/_security/user/kibana_system/_password -d &quot;&#123;\&quot;password\&quot;:\&quot;$&#123;KIBANA_PASSWORD&#125;\&quot;&#125;&quot; | grep -q &quot;^&#123;&#125;&quot;; do sleep 10; done;</span></span><br><span class="line"><span class="string">        echo &quot;All done!&quot;;</span></span><br><span class="line"><span class="string">      &#x27;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>: [<span class="string">&quot;CMD-SHELL&quot;</span>, <span class="string">&quot;[ -f config/certs/es01/es01.crt ]&quot;</span>]</span><br><span class="line">      interval: 1s</span><br><span class="line">      <span class="built_in">timeout</span>: 5s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es01:</span><br><span class="line">    depends_on:</span><br><span class="line">      setup:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - ELASTIC_PASSWORD=<span class="variable">$&#123;ELASTIC_PASSWORD&#125;</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es01/es01.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es01/es01.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es01/es01.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es01/es01.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es02:</span><br><span class="line">    depends_on:</span><br><span class="line">      - es01</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es02/plugins:/usr/share/elasticsearch/plugins      </span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200     </span><br><span class="line">      - 9301:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es02/es02.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es02/es02.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es02/es02.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es02/es02.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es03:</span><br><span class="line">    depends_on:</span><br><span class="line">      - es02</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200     </span><br><span class="line">      - 9302:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es03/es03.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es03/es03.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es03/es03.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es03/es03.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  kibana:</span><br><span class="line">    depends_on:</span><br><span class="line">      es01:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">      es02:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">      es03:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">    image: arm64v8/kibana:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/kibana/config/certs</span><br><span class="line">      - ./kibana/data:/usr/share/kibana/data</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="variable">$&#123;KIBANA_PORT&#125;</span>:5601</span><br><span class="line">    environment:</span><br><span class="line">      - SERVERNAME=kibana</span><br><span class="line">      - ELASTICSEARCH_HOSTS=https://es01:9200</span><br><span class="line">      - ELASTICSEARCH_USERNAME=kibana_system</span><br><span class="line">      - ELASTICSEARCH_PASSWORD=<span class="variable">$&#123;KIBANA_PASSWORD&#125;</span></span><br><span class="line">      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt</span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s -I http://localhost:5601 | grep -q &#x27;HTTP/1.1 302 Found&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120    </span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mac/" rel="tag"># mac</a>
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/lima/" rel="tag"># lima</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/MacOS%E5%AE%89%E8%A3%85lima-docker/" rel="prev" title="MacOS安装lima-docker">
+                  <i class="fa fa-chevron-left"></i> MacOS安装lima-docker
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="linux常用命令">
+                  linux常用命令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanhangr</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

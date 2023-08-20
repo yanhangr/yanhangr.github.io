@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"Style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="三个工具wechaty : rpa chatbothttps:&#x2F;&#x2F;github.com&#x2F;wechaty&#x2F;wechaty#readme chatgpt：一个由openai训练对大型语音模型登录地址：https:&#x2F;&#x2F;chat.openai.com&#x2F;auth&#x2F;login 注册openai教程： https:&#x2F;&#x2F;zblogs.top&#x2F;how-to-register-openai-chatgpt-in-ch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wechat和chatgpt打造chatRobot">
+<meta property="og:url" content="http://example.com/wechat%E5%92%8Cchatgpt%E6%89%93%E9%80%A0chatRobot/index.html">
+<meta property="og:site_name" content="yanhangr">
+<meta property="og:description" content="三个工具wechaty : rpa chatbothttps:&#x2F;&#x2F;github.com&#x2F;wechaty&#x2F;wechaty#readme chatgpt：一个由openai训练对大型语音模型登录地址：https:&#x2F;&#x2F;chat.openai.com&#x2F;auth&#x2F;login 注册openai教程： https:&#x2F;&#x2F;zblogs.top&#x2F;how-to-register-openai-chatgpt-in-ch">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-11T13:32:19.601Z">
+<meta property="article:modified_time" content="2023-03-08T10:43:52.043Z">
+<meta property="article:author" content="yanhangr">
+<meta property="article:tag" content="wechat,chatgpt">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/wechat%E5%92%8Cchatgpt%E6%89%93%E9%80%A0chatRobot/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/wechat%E5%92%8Cchatgpt%E6%89%93%E9%80%A0chatRobot/","path":"wechat和chatgpt打造chatRobot/","title":"wechat和chatgpt打造chatRobot"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>wechat和chatgpt打造chatRobot | yanhangr</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yanhangr</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E5%B7%A5%E5%85%B7"><span class="nav-text">三个工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wechaty-rpa-chatbot"><span class="nav-text">wechaty : rpa chatbot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chatgpt%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%94%B1openai%E8%AE%AD%E7%BB%83%E5%AF%B9%E5%A4%A7%E5%9E%8B%E8%AF%AD%E9%9F%B3%E6%A8%A1%E5%9E%8B"><span class="nav-text">chatgpt：一个由openai训练对大型语音模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#railway%EF%BC%9A%E5%85%8D%E8%B4%B9%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8"><span class="nav-text">railway：免费部署应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%EF%BC%9A"><span class="nav-text">开源工具：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yanhangr"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">yanhangr</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yanhangr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yanhangr" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yanhangr@163.com" title="E-Mail → mailto:yanhangr@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/wechat%E5%92%8Cchatgpt%E6%89%93%E9%80%A0chatRobot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="yanhangr">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="wechat和chatgpt打造chatRobot | yanhangr">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wechat和chatgpt打造chatRobot
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-11 21:32:19" itemprop="dateCreated datePublished" datetime="2022-12-11T21:32:19+08:00">2022-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-08 18:43:52" itemprop="dateModified" datetime="2023-03-08T18:43:52+08:00">2023-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ai/" itemprop="url" rel="index"><span itemprop="name">ai</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="三个工具"><a href="#三个工具" class="headerlink" title="三个工具"></a>三个工具</h2><h3 id="wechaty-rpa-chatbot"><a href="#wechaty-rpa-chatbot" class="headerlink" title="wechaty : rpa chatbot"></a>wechaty : rpa chatbot</h3><p><a target="_blank" rel="noopener" href="https://github.com/wechaty/wechaty#readme">https://github.com/wechaty/wechaty#readme</a></p>
+<h3 id="chatgpt：一个由openai训练对大型语音模型"><a href="#chatgpt：一个由openai训练对大型语音模型" class="headerlink" title="chatgpt：一个由openai训练对大型语音模型"></a>chatgpt：一个由openai训练对大型语音模型</h3><p>登录地址：<a target="_blank" rel="noopener" href="https://chat.openai.com/auth/login">https://chat.openai.com/auth/login</a></p>
+<p>注册openai教程：</p>
+<p><a target="_blank" rel="noopener" href="https://zblogs.top/how-to-register-openai-chatgpt-in-china/">https://zblogs.top/how-to-register-openai-chatgpt-in-china/</a></p>
+<p><a target="_blank" rel="noopener" href="https://mirror.xyz/boxchen.eth/9O9CSqyKDj4BKUIil7NC1Sa1LJM-3hsPqaeW_QjfFBc">https://mirror.xyz/boxchen.eth/9O9CSqyKDj4BKUIil7NC1Sa1LJM-3hsPqaeW_QjfFBc</a></p>
+<p>手机号获取网站：<a target="_blank" rel="noopener" href="https://sms-activate.org/cn/getNumber">https://sms-activate.org/cn/getNumber</a></p>
+<h3 id="railway：免费部署应用"><a href="#railway：免费部署应用" class="headerlink" title="railway：免费部署应用"></a>railway：免费部署应用</h3><p><a target="_blank" rel="noopener" href="https://railway.app/new">https://railway.app/new</a></p>
+<p>github账号登录</p>
+<h3 id="开源工具："><a href="#开源工具：" class="headerlink" title="开源工具："></a>开源工具：</h3><p><a target="_blank" rel="noopener" href="https://github.com/fuergaosi233/wechat-chatgpt">https://github.com/fuergaosi233/wechat-chatgpt</a></p>
+<p>docker run -d –name wechat-chatgpt  holegots&#x2F;wechat-chatgpt:latest</p>
+<p>docker run -d –name wechat-chatgpt -v .&#x2F;config.yaml:&#x2F;app&#x2F;config.yaml  holegots&#x2F;wechat-chatgpt:latest</p>
+<p>docker run -d –name wechat-chatgpt -v $(pwd)&#x2F;config.yaml:&#x2F;app&#x2F;config.yaml -v $(pwd)&#x2F;wechat-assistant.memory-card.json:&#x2F;app&#x2F;wechat-assistant.memory-card.json holegots&#x2F;wechat-chatgpt:latest</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wechat-chatgpt/" rel="tag"># wechat,chatgpt</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/elasticsearch%E4%B9%8B%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/" rel="prev" title="elasticsearch之配置参数">
+                  <i class="fa fa-chevron-left"></i> elasticsearch之配置参数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ES%E5%86%99%E5%85%A5%E5%92%8C%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B/" rel="next" title="ES写入和查询流程">
+                  ES写入和查询流程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanhangr</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

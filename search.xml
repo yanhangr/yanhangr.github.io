@@ -20,6 +20,9 @@
 <p>homebrew常用命令</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#命令查看</span></span><br><span class="line">$ brew <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询可安装软件</span></span><br><span class="line">$ brew search &lt;xxx&gt;</span><br><span class="line">或者访问 https://formulae.brew.sh 查看</span><br><span class="line"><span class="comment">#禁止自动更新已安装软件</span></span><br><span class="line">$ vi ~/.zshrc</span><br><span class="line"><span class="built_in">export</span> HOMEBREW_NO_AUTO_UPDATE=<span class="literal">true</span> <span class="comment">#禁止自动更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装依赖</span></span><br><span class="line">$ brew deps --installed --tree</span><br><span class="line"></span><br><span class="line"><span class="comment">#清除缓存及过期软件</span></span><br><span class="line">$ brew cleanup</span><br><span class="line">有部分缓存仍然清除不掉，可以到目录下手动清除 ～/Library/Caches/homebrew</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装到依赖关系</span></span><br><span class="line">$ brew deps -n maven</span><br><span class="line">n表示几层依赖</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装去除依赖</span></span><br><span class="line"><span class="comment">#假设安装maven，不再安装依赖jdk</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br></pre></td></tr></table></figure>
 
+<p>brew install 安装指定版本，注意提前禁止自动更新</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 因idea安装版本为2021.2，版本兼容，maven安装需要安装maven 3.8.1及之前的版本</span></span><br><span class="line"><span class="comment"># 参考文档 https://shockerli.net/post/homebrew-install-formula-specific-version/</span></span><br><span class="line"><span class="comment">##1.获得其在 homebrew/core 仓库的文件路径：Formula/maven.rb</span></span><br><span class="line">$ brew info maven</span><br><span class="line">==&gt; maven: stable 3.8.1 (bottled)</span><br><span class="line">Java-based project management</span><br><span class="line">https://maven.apache.org/</span><br><span class="line">Conflicts with:</span><br><span class="line">  mvnvm (because also installs a <span class="string">&#x27;mvn&#x27;</span> executable)</span><br><span class="line">Not installed</span><br><span class="line">From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/maven.rb</span><br><span class="line">License: Apache-2.0</span><br><span class="line"></span><br><span class="line"><span class="comment">##2.查看 homebrew/core 的仓库路径：</span></span><br><span class="line">$ brew tap-info homebrew/core </span><br><span class="line">homebrew/core: 2 commands, 5687 formulae</span><br><span class="line">/opt/homebrew/Library/Taps/homebrew/homebrew-core (6,039 files, 556.7MB)</span><br><span class="line">From: https://github.com/Homebrew/homebrew-core</span><br><span class="line"></span><br><span class="line"><span class="comment">##3.切换为homebrew/core 的仓库路径</span></span><br><span class="line">$ <span class="built_in">cd</span> /opt/homebrew/Library/Taps/homebrew/homebrew-core</span><br><span class="line"></span><br><span class="line"><span class="comment">##4.找到你需要 Checkout 至的 Commit</span></span><br><span class="line">$ git <span class="built_in">log</span> -p -- Formula/maven.rb | grep -e ^commit -e <span class="string">&#x27;url &quot;http&#x27;</span></span><br><span class="line">commit 225b9036c0db7c4439de7ee540a07baa481dc2ae</span><br><span class="line">commit fea44adff90c1b485fb2c109dbb77f012d9e955f</span><br><span class="line">commit 1a09b5ca3336d2b0b8ed695f503e4e79832411ed</span><br><span class="line">commit 16dcbd7cdd50ee3639f19c190c956a0fc00979ed</span><br><span class="line">-  url <span class="string">&quot;https://www.apache.org/dyn/closer.lua?path=maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz&quot;</span></span><br><span class="line">+  url <span class="string">&quot;https://www.apache.org/dyn/closer.lua?path=maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz&quot;</span></span><br><span class="line">     url <span class="string">&quot;https://maven.apache.org/download.cgi&quot;</span></span><br><span class="line"><span class="comment">##5.切换分支到3.8.1版本,注意+ 代表新增 - 代表移除</span></span><br><span class="line">$ git checkout fea44adff90c1b485fb2c109dbb77f012d9e955f</span><br><span class="line">.....</span><br><span class="line">HEAD is now at fea44adff90 maven: add 3.8.1 bottle.</span><br><span class="line"></span><br><span class="line"><span class="comment">##6.安装对应版本</span></span><br><span class="line">$ brew install --ignore-dependencies maven</span><br><span class="line"></span><br><span class="line"><span class="comment">##7.切回master分支</span></span><br><span class="line">$ git checkout master</span><br></pre></td></tr></table></figure>
+
 <p>下面绝大部分软件的安装均可以使用homebrew来完成安装，如果需要特殊安装会特别标注</p>
 <h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>用默认的safari，感觉比chrome省电</p>
 <h2 id="productivity-software"><a href="#productivity-software" class="headerlink" title="productivity software"></a>productivity software</h2><ol>
@@ -88,6 +91,7 @@
 
 <h3 id="配置镜像加速器"><a href="#配置镜像加速器" class="headerlink" title="配置镜像加速器"></a>配置镜像加速器</h3><p>默认的镜像源，依然比较慢，这里我们依然采用阿里云的</p>
 <p>查找路径：阿里云网站&#x3D;&#x3D;》登录&#x3D;&#x3D;》控制台&#x3D;&#x3D;》容器镜像服务&#x3D;&#x3D;》镜像中心&#x3D;&#x3D;》镜像加速器(centos)<br>新建daemon.json目录</p>
+<p><a href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo <span class="built_in">mkdir</span> -p /etc/docker</span><br></pre></td></tr></table></figure>
 
 <p>配置daemon.json文件，仓库镜像地址每个人都不同，根据自己的配置</p>
@@ -102,7 +106,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
 <p>其他命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker container <span class="built_in">exec</span> -it &lt;containId&gt; /bin/bash <span class="comment">#进入容器</span></span><br><span class="line">$ docker ps -a  <span class="comment">#查看运行的容器</span></span><br><span class="line">$ docker stop container containId <span class="comment">#停容器</span></span><br><span class="line">$ docker <span class="built_in">rm</span> container containId  <span class="comment">#删除容器</span></span><br><span class="line">$ docker images <span class="comment">#查看当前docker的镜像</span></span><br><span class="line">$ docker rmi image imageId <span class="comment">#删除镜像</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker container <span class="built_in">exec</span> -it &lt;containId&gt; bash <span class="comment">#进入容器</span></span><br><span class="line">$ docker ps -a  <span class="comment">#查看运行的容器</span></span><br><span class="line">$ docker stop container containId <span class="comment">#停容器</span></span><br><span class="line">$ docker <span class="built_in">rm</span> containId  <span class="comment">#删除容器</span></span><br><span class="line">$ docker images <span class="comment">#查看当前docker的镜像</span></span><br><span class="line">$ docker rmi imageId <span class="comment">#删除镜像</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -116,28 +120,29 @@
     <title>Docker安装Mysql</title>
     <url>/docker%E5%AE%89%E8%A3%85mysql/</url>
     <content><![CDATA[<p>拉取镜像</p>
-<p>默认拉取最新的稳定版本，我这里是mysql 8</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql</span><br></pre></td></tr></table></figure>
 <p>指定拉取版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql:5.6</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull mysql:8.0</span><br></pre></td></tr></table></figure>
 
-<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run \</span><br><span class="line">    -p 3306:3306 \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -v /docker/data/mysql/data:/var/lib/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/log:/var/log/mysql:rw \</span><br><span class="line">    -v /docker/data/mysql/config/my.cnf:/etc/mysql/my.cnf:rw \</span><br><span class="line">    -v /etc/localtime:/etc/localtime:ro \</span><br><span class="line">    --name mysql \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -d mysql</span><br></pre></td></tr></table></figure>
+<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr/share</span><br><span class="line">$ <span class="built_in">mkdir</span> docker/mysql8.0</span><br><span class="line">$ <span class="built_in">cd</span> docker/mysql8.0</span><br><span class="line">$ <span class="built_in">mkdir</span> -p docker/mysql8.0/data</span><br><span class="line">$ <span class="built_in">mkdir</span> -p docker/mysql8.0/log</span><br><span class="line">$ <span class="built_in">mkdir</span> -p docker/mysql8.0/config</span><br><span class="line">$ docker run \</span><br><span class="line">    -p 3306:3306 \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -v /docker/mysql8.0/data:/var/lib/mysql:rw \</span><br><span class="line">    -v /docker/mysql8.0/log:/var/log/mysql:rw \</span><br><span class="line">    -v /docker/mysql8.0/config/my.cnf:/etc/my.cnf:rw \</span><br><span class="line">    -v /etc/localtime:/etc/localtime:ro \</span><br><span class="line">    --name mysql \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -d</span><br></pre></td></tr></table></figure>
 
-<p>-p 表示端口映射，宿主机端口:容器端口<br>-e 表示设置环境变量 MYSQL_ROOT_PASSWORD是root用户的登陆密码<br>-v 表示挂载数据卷<br>-d 表示后台运行容器<br>–name 表示对容器重命名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-p 表示端口映射，宿主机端口:容器端口</span><br><span class="line">-e 表示设置环境变量 MYSQL_ROOT_PASSWORD是root用户的登陆密码</span><br><span class="line">-v 表示挂载数据卷</span><br><span class="line">-d 表示后台运行容器</span><br><span class="line">--restart=always 表示开机自动启动</span><br><span class="line">--name 表示对容器重命名</span><br></pre></td></tr></table></figure>
 <p>注：-v 挂载的是到宿主机的文件夹，而my.cnf是个文件，会报如下错误:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Are you trying to mount a directory onto a file (or vice-versa)? Check <span class="keyword">if</span> the specified host path exists and is the expected <span class="built_in">type</span>.</span><br></pre></td></tr></table></figure>
 <p>需要预在挂载目录建好该文件”&#x2F;docker&#x2F;data&#x2F;mysql&#x2F;config&#x2F;my.cnf”</p>
 <p>这个文件怎么来呢，可以从如下步骤获得：</p>
 <p>先简单run一个mysql_test</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run --name mysql_test -d mysql</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run -e MYSQL_ROOT_PASSWORD=123456 --name mysql_test -d mysql</span><br></pre></td></tr></table></figure>
 
 <p>然后从这个mysql容器里拷贝到本地宿主机来，”b858438722c5”是mysql_test这个容器ID</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">cp</span> b858438722c5:/etc/mysql/my.cnf /docker/data/mysql/config/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">cp</span> b858438722c5:/etc/my.cnf /docker/mysql8.0/config</span><br></pre></td></tr></table></figure>
 
 <p>最后删除这个容器即可</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">rm</span> -f b858438722c5</span><br></pre></td></tr></table></figure>
 
 <h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>Docker-compose.yml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  mysql:</span><br><span class="line">    image:arm64v8/mysql:8.0</span><br><span class="line">    container_name: mysql</span><br><span class="line">    environment:</span><br><span class="line">    	- MYSQL_ROOT_PASSWORD=123456</span><br><span class="line">    volumes:</span><br><span class="line">    	- /docker/mysql8.0/data:/var/lib/mysql:rw \</span><br><span class="line">    	- /docker/mysql8.0/log:/var/log/mysql:rw \</span><br><span class="line">    	- /docker/mysql8.0/config/my.cnf:/etc/my.cnf:rw \</span><br><span class="line">    	- /etc/localtime:/etc/localtime:ro \</span><br><span class="line">    ports:</span><br><span class="line">   		- 3306:3306</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -186,7 +191,8 @@
 <h2 id="ES基础"><a href="#ES基础" class="headerlink" title="ES基础"></a>ES基础</h2><p>1、ES的安装和配置<br>&#x3D;&#x3D;&gt;<a href="https://yanhangr.github.io/2020/08/09/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/">使用docker安装elasticsearch集群</a><br>2、基本概念<br>mapping和setting<br>3、ES集群的查询和写入逻辑<br>4、query<br>5、aggregation<br>6、analysis<br>7、运维和监控</p>
 <h2 id="ES搜索"><a href="#ES搜索" class="headerlink" title="ES搜索"></a>ES搜索</h2><p>1、ES插件开发(基于hanlp的分词插件)<br>2、智能纠错<br>3、联想词</p>
 <h2 id="生产实战"><a href="#生产实战" class="headerlink" title="生产实战"></a>生产实战</h2><p>1、ES多活灾备<br>2、ES多种写入方式<br>3、基于Java注解的mapping生成工具<br>4、多集群多索引的通用写入查询功能<br>5、大数据量下的写入查询优化</p>
-<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
+<h2 id="ES涉及的算法"><a href="#ES涉及的算法" class="headerlink" title="ES涉及的算法"></a>ES涉及的算法</h2><p>1、各种类型的搜索算法是什么养的，比如数值类型如何被查询的（大于小于）</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>1、ES启动<br>2、ES threadPool<br>3、ES action</p>
 ]]></content>
       <categories>
         <category>elasticsearch</category>
@@ -194,18 +200,6 @@
       <tags>
         <tag>elasticsearch</tag>
         <tag>搜索</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mysql--数据库字段</title>
-    <url>/Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/</url>
-    <content><![CDATA[<h2 id="数据库字段规范"><a href="#数据库字段规范" class="headerlink" title="数据库字段规范"></a>数据库字段规范</h2><h3 id="主键ID-（unsigned-int-自增）"><a href="#主键ID-（unsigned-int-自增）" class="headerlink" title="主键ID （unsigned int 自增）"></a>主键ID （unsigned int 自增）</h3><p>可存储0 ~ 4294967295之间，占4个字节（byte），32位；单表最大可存储42亿数据完全够用<br>相比 unsigned bigint完全用不上，占用空间又大，其实单表超过千万条数据，就应该分表了</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -533,6 +527,7 @@
     <content><![CDATA[<h2 id="截屏"><a href="#截屏" class="headerlink" title="截屏"></a>截屏</h2><p>打开截录屏工具  Shift+Command+5</p>
 <p>选择截屏  Shift+Command+4</p>
 <p><a href="https://support.apple.com/zh-cn/guide/mac-help/mh26782/mac">https://support.apple.com/zh-cn/guide/mac-help/mh26782/mac</a></p>
+<h2 id="切换输入法"><a href="#切换输入法" class="headerlink" title="切换输入法"></a>切换输入法</h2><p>Control + 空格</p>
 ]]></content>
       <categories>
         <category>mac</category>
@@ -542,25 +537,28 @@
       </tags>
   </entry>
   <entry>
-    <title>MacOS安装docker</title>
-    <url>/MacOS%E5%AE%89%E8%A3%85docker/</url>
+    <title>MacOS安装lima-docker</title>
+    <url>/MacOS%E5%AE%89%E8%A3%85lima-docker/</url>
     <content><![CDATA[<p>系统简介：Apple Silicon(M1pro)  macOS monterey 12.6   32g内存</p>
-<h3 id="安装方案"><a href="#安装方案" class="headerlink" title="安装方案"></a>安装方案</h3><p>​		在macOS使用docker，大概有3种方案</p>
-<h4 id="安装Linux虚机再安装docker"><a href="#安装Linux虚机再安装docker" class="headerlink" title="安装Linux虚机再安装docker"></a>安装Linux虚机再安装docker</h4><p>​		在mac安装虚机一般使用Parallel Desktop，然后安装liunx虚机之后再去安装docker</p>
+<h3 id="安装方案"><a href="#安装方案" class="headerlink" title="安装方案"></a>安装方案</h3><p>在macOS使用docker，大概有3种方案</p>
+<h4 id="安装Linux虚机再安装docker"><a href="#安装Linux虚机再安装docker" class="headerlink" title="安装Linux虚机再安装docker"></a>安装Linux虚机再安装docker</h4><p>在mac安装虚机一般使用Parallel Desktop，然后安装liunx虚机之后再去安装docker，</p>
 <p>不过Parallel Desktop是付费软件。</p>
-<h4 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker desktop"></a>docker desktop</h4><p>​		使用homebrew安装 brew install docker。据说，docker desktop占用资源较多，这里我们先不考虑</p>
-<h4 id="基于lima使用docker"><a href="#基于lima使用docker" class="headerlink" title="基于lima使用docker"></a>基于lima使用docker</h4><p>​		Lima本质上是一个基于<a href="https://www.qemu.org/">QEMU</a>的Linux虚拟机解决方案</p>
+<h4 id="docker-desktop"><a href="#docker-desktop" class="headerlink" title="docker desktop"></a>docker desktop</h4><p>使用homebrew安装 brew install docker。据说，docker desktop占用资源较多，这里我们先不考虑</p>
+<h4 id="基于lima使用docker"><a href="#基于lima使用docker" class="headerlink" title="基于lima使用docker"></a>基于lima使用docker</h4><p>Lima本质上是一个基于<a href="https://www.qemu.org/">QEMU</a>的Linux虚拟机解决方案</p>
 <h3 id="基于lima安装docker"><a href="#基于lima安装docker" class="headerlink" title="基于lima安装docker"></a>基于lima安装docker</h3><h4 id="安装lima"><a href="#安装lima" class="headerlink" title="安装lima"></a>安装lima</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install lima</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装期间因缺少依赖会报错，使用brew install安装即可</span></span><br><span class="line">Error: No such file or directory @ rb_sysopen - /Users/yanhangr/Library/Caches/Homebrew/downloads/64c0acb2789c8720a31321e4d9452be60a04e728738e0c4d2bd74c4d26e847d4--libssh-0.10.0.arm64_monterey.bottle.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install libssh</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="启动lima"><a href="#启动lima" class="headerlink" title="启动lima"></a>启动lima</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --list-templates      <span class="comment"># 查看模板列表</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> /opt/homebrew/share/lima/examples <span class="comment">#模板具体配置</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=default template://default</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">选择执行创建一个default的实例，lima会自动下载vm镜像和启动虚机</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建成功会看到 INFO[0065] READY. Run `lima` to open the shell.</span>  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl list                        <span class="comment"># 查看实例运行状态</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl copy default:/etc/ dst:/etc <span class="comment"># 跨实例复制文件</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl delete default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl prune <span class="comment">#清缓存,即删除目录</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="启动lima"><a href="#启动lima" class="headerlink" title="启动lima"></a>启动lima</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --list-templates      <span class="comment"># 查看模板列表</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> /opt/homebrew/share/lima/examples <span class="comment">#模板具体配置</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=default template://default</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">选择执行创建一个default的实例，lima会自动下载vm镜像和启动虚机</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建成功会看到 INFO[0065] READY. Run `lima` to open the shell.</span>  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl list                        <span class="comment"># 查看实例运行状态</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl copy default:/etc/ dst:/etc <span class="comment"># 跨实例复制文件</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl delete default</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl prune <span class="comment">#清缓存,即删除目录</span></span></span><br></pre></td></tr></table></figure>
 
 <h4 id="虚机内对容器操作"><a href="#虚机内对容器操作" class="headerlink" title="虚机内对容器操作"></a>虚机内对容器操作</h4><p>lima nerdctl是一个组合命令，前半段lima代表虚拟机层面的操作，其实lima是完整命令limactl shell default的简写，这段命令的含义是在虚拟机”default”中执行命令。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima <span class="comment">#执行进入虚机</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">nerdctl ps <span class="comment">#查看镜像</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">nerdctl <span class="built_in">exec</span> -it &lt;<span class="built_in">id</span>&gt; /bin/bash <span class="comment">#进入容器</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">不进入虚机执行</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima nerdctl ps</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lima nerdctl -it &lt;<span class="built_in">id</span>&gt; /bin/bash</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="基于lima安装docker-1"><a href="#基于lima安装docker-1" class="headerlink" title="基于lima安装docker"></a>基于lima安装docker</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=docker template://docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl shell docker <span class="comment">#进入虚机，然后使用docker命令即可</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps <span class="comment">#这里可以使用docker正常命令</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动停止docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start docker</span></span><br></pre></td></tr></table></figure>
+<h4 id="基于lima安装docker-1"><a href="#基于lima安装docker-1" class="headerlink" title="基于lima安装docker"></a>基于lima安装docker</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start --name=docker template://docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl shell docker <span class="comment">#进入虚机，然后使用docker命令即可</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps <span class="comment">#这里可以使用docker正常命令</span></span></span><br><span class="line"></span><br><span class="line">//启动停止docker</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl stop docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl start docker</span></span><br><span class="line"></span><br><span class="line">//docker-compose 相关命令</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker compose up <span class="comment">#启动镜像</span></span>    </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker compose up -d <span class="comment">#启动并在后台运行</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker compose down <span class="comment">#关闭镜像</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">doker compose down -v <span class="comment">#关闭并删除镜像</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="基于lima安装常用开发软件"><a href="#基于lima安装常用开发软件" class="headerlink" title="基于lima安装常用开发软件"></a>基于lima安装常用开发软件</h3><p>以下均基于docker(template:&#x2F;&#x2F;docker)去安装</p>
-<h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><h4 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h4><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://github.com/lima-vm/lima#getting-started%EF%BC%88%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%EF%BC%89">https://github.com/lima-vm/lima#getting-started（官方文档）</a></p>
+<h4 id="配置lima-docker镜像加速"><a href="#配置lima-docker镜像加速" class="headerlink" title="配置lima docker镜像加速"></a>配置lima docker镜像加速</h4><p>两种方式都没有配置生效。@todo</p>
+<p>1、进入lima-docker之后，通过修改&#x2F;etc&#x2F;docker&#x2F;daemon.json的方式修改没有生效</p>
+<p>2、通过container的方式配置也没有生效，参考文档 </p>
+<p><a href="https://github.com/containerd/containerd/blob/main/docs/hosts.md">https://github.com/containerd/containerd/blob/main/docs/hosts.md</a></p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://github.com/lima-vm/lima#getting-started%EF%BC%88%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%EF%BC%89">https://github.com/lima-vm/lima#getting-started（官方文档）</a></p>
 <p>2、<a href="https://chennima.github.io/lima-alternative-docker-desktop-for-mac">https://chennima.github.io/lima-alternative-docker-desktop-for-mac</a></p>
 <p>3、<a href="https://dockerbook.tw/docs/alternatives/lima/">https://dockerbook.tw/docs/alternatives/lima/</a></p>
 <p>4、<a href="https://z.itpub.net/article/detail/FE826C8D74DACC49C1F8B52EB0CD9A5D">https://z.itpub.net/article/detail/FE826C8D74DACC49C1F8B52EB0CD9A5D</a></p>
@@ -570,6 +568,294 @@
       </categories>
       <tags>
         <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于lima-docker安装elasticsearch集群</title>
+    <url>/%E5%9F%BA%E4%BA%8Elima-docker%E5%AE%89%E8%A3%85elasticsearch%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<p>在macOS Apple Silicon(M1pro) 上，基于lima-docker采取 docker-compose 的方式来进行部署</p>
+<h3 id="进入lima-docker"><a href="#进入lima-docker" class="headerlink" title="进入lima-docker"></a>进入lima-docker</h3><p>通过Mac terminal</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">limactl shell docker</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>其他版本自己设定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker pull arm64v8/elasticsearch:7.12.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装前配置"><a href="#安装前配置" class="headerlink" title="安装前配置"></a>安装前配置</h3><h4 id="文件描述符设置"><a href="#文件描述符设置" class="headerlink" title="文件描述符设置"></a>文件描述符设置</h4><p>设置目的：因为es会用到大量的文件描述符和文件句柄，Linux默认1024，如果文件描述符用完，会导致数据丢失</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看文件描述符限制，默认是1024</span></span><br><span class="line">$ <span class="built_in">ulimit</span> -n</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改文件描述符</span></span><br><span class="line"><span class="comment">#临时修改，仅在当前session生效</span></span><br><span class="line">$ sudo su  </span><br><span class="line">$ <span class="built_in">ulimit</span> -n 65535 </span><br><span class="line">$ su yanhangr</span><br><span class="line"></span><br><span class="line"><span class="comment">#永久生效</span></span><br><span class="line">$ vi /etc/security/limits.conf</span><br><span class="line"><span class="comment">#添加行,设置最大描述符65535，yanhangr表示用户名</span></span><br><span class="line">yanhangr  -  nofile  65535</span><br></pre></td></tr></table></figure>
+
+<p>注意：Ubuntu 优先使用init.d而不是limits.conf。这里需要编辑&#x2F;etc&#x2F;pam.d&#x2F;su，确保下面这行“#”不存在</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># session    required   pam_limits.so</span></span><br></pre></td></tr></table></figure>
+
+<p>官方解释：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/file-descriptors.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/file-descriptors.html</a></p>
+<h4 id="vm-max-map-count设置"><a href="#vm-max-map-count设置" class="headerlink" title="vm_max_map_count设置"></a>vm_max_map_count设置</h4><p>设置目的：Elasticsearch 对各种文件混合使用了 NioFs（ 注：非阻塞文件系统）和 MMapFs （ 注：内存映射文件系统）。请确保你配置的最大映射数量，以便有足够的虚拟内存可用于 mmapped 文件。</p>
+<p>官方解释：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/vm-max-map-count.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/vm-max-map-count.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.max_map_count=262144 <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="disable-swapping"><a href="#disable-swapping" class="headerlink" title="disable swapping"></a>disable swapping</h4><p>设置目的：Linux设置swap的目的是当物理内存不够的时候，将内存不活跃数据转移到磁盘，即你的swap分区，避免oom</p>
+<p>这里有个问题是导致大量的IO，使得性能变差，所以需要关闭swap。</p>
+<p>官方解释：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/setup-configuration-memory.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/setup-configuration-memory.html</a></p>
+<p>关闭swap有3种方法</p>
+<ol>
+<li><p>禁用swap</p>
+<p>临时禁用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo swapoff -a</span><br></pre></td></tr></table></figure>
+
+<p>永久禁用</p>
+<p>编辑&#x2F;etc&#x2F;fstab文件，在swap分区这行前加 # 禁用掉，保存退出</p>
+</li>
+<li><p>设置swapni</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf <span class="comment">#编辑sysctl.conf</span></span><br><span class="line">$ vm.swappiness=1  <span class="comment">#加入配置</span></span><br><span class="line">$ sysctl -p <span class="comment">#启用配置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>elasticsearch.yml 设置，如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bootstrap.memory_lock=<span class="literal">true</span></span><br><span class="line">ulimits:</span><br><span class="line">  memlock:</span><br><span class="line">    soft: -1</span><br><span class="line">    hard: -1</span><br></pre></td></tr></table></figure>
+
+<p>此种方法会导致如下问题，因为无法正常使用ulimits命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error setting rlimits for ready process: error setting rlimit type 8: operation not permitted: unknown</span><br></pre></td></tr></table></figure>
+
+<p>具体原因可能和<a href="https://github.com/nestybox">nestybox</a>&#x2F;**<a href="https://github.com/nestybox/sysbox">sysbox</a>**有关系，具体和lima的关系暂时还没有搞清楚</p>
+<p><a href="https://github.com/nestybox/sysbox/issues/351">https://github.com/nestybox/sysbox/issues/351</a></p>
+<p>Lima-vm默认已禁用swap，所以可以先不检查memory_lock，且不再设置ulimits</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yanhangr@lima-docker:/tmp/lima$ free -h</span><br><span class="line">               total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8Gi       250Mi       3.1Gi       1.0Mi       510Mi       3.4Gi</span><br><span class="line">Swap:             0B          0B          0B</span><br></pre></td></tr></table></figure>
+
+<p>lima-vm关于swap的文档  <a href="https://github.com/lima-vm/lima/discussions/941">Is swap space configurable? </a></p>
+</li>
+</ol>
+<h3 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h3><h4 id="Es7-12版本"><a href="#Es7-12版本" class="headerlink" title="Es7.12版本"></a>Es7.12版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: arm64v8/elasticsearch:7.12.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic      </span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<p>（1）对data、logs、plugins、config重新挂载，其中config目录里面的文件可从docker镜像里面copy出来</p>
+<p>（2）日志配置 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html">https://www.elastic.co/guide/en/elasticsearch/reference/7.12/logging.html</a></p>
+<h4 id="es-kibana-7-14版本"><a href="#es-kibana-7-14版本" class="headerlink" title="es+kibana 7.14版本"></a>es+kibana 7.14版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;2.2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  es01:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es01</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es02:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es02</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node02/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200</span><br><span class="line">      - 9301:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">  es03:</span><br><span class="line">    image: arm64v8/elasticsearch:7.14.0</span><br><span class="line">    container_name: es03</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=es-docker-cluster</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./node03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./node03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./node03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">      - ./config:/usr/share/elasticsearch/config</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200</span><br><span class="line">      - 9302:9300</span><br><span class="line">    networks:</span><br><span class="line">      - elastic    </span><br><span class="line">  kibana:</span><br><span class="line">		container_name: kibana</span><br><span class="line">    image: arm64v8/kibana:7.14.0</span><br><span class="line">    volumes:</span><br><span class="line">      - ./kibana/data:/usr/share/kibana/data</span><br><span class="line">      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml  </span><br><span class="line">    ports:</span><br><span class="line">      - 5601:5601</span><br><span class="line">    depends_on:</span><br><span class="line">      - es01</span><br><span class="line">      - es02</span><br><span class="line">      - es03</span><br><span class="line">    networks:</span><br><span class="line">      - elastic      </span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>kibana.yml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ** THIS IS AN AUTO-GENERATED FILE **</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default Kibana configuration for docker target</span></span><br><span class="line">server.host: <span class="string">&quot;0&quot;</span></span><br><span class="line">server.shutdownTimeout: <span class="string">&quot;5s&quot;</span></span><br><span class="line">elasticsearch.hosts: <span class="string">&#x27;[&quot;http://es01:9200&quot;,&quot;http://es02:9201&quot;,&quot;http://es03:9202&quot;]&#x27;</span></span><br><span class="line">monitoring.ui.container.elasticsearch.enabled: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="es-kibana-8-5版本"><a href="#es-kibana-8-5版本" class="headerlink" title="es+kibana 8.5版本"></a>es+kibana 8.5版本</h4><p>.env</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Password for the &#x27;elastic&#x27; user (at least 6 characters)</span></span><br><span class="line">ELASTIC_PASSWORD=<span class="string">&#x27;changeme&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Password for the &#x27;kibana_system&#x27; user (at least 6 characters)</span></span><br><span class="line">KIBANA_PASSWORD=<span class="string">&#x27;changeme&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Version of Elastic products</span></span><br><span class="line">STACK_VERSION=8.5.0</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Set the cluster name</span></span><br><span class="line">CLUSTER_NAME=docker-es-cluster</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Set to &#x27;basic&#x27; or &#x27;trial&#x27; to automatically start the 30-day trial</span></span><br><span class="line">LICENSE=basic</span><br><span class="line"><span class="comment">#LICENSE=trial</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Port to expose Elasticsearch HTTP API to the host</span></span><br><span class="line">ES_PORT=9200</span><br><span class="line"><span class="comment">#ES_PORT=127.0.0.1:9200</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Port to expose Kibana to the host</span></span><br><span class="line">KIBANA_PORT=5601</span><br><span class="line"><span class="comment">#KIBANA_PORT=80</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Increase or decrease based on the available host memory (in bytes)</span></span><br><span class="line">MEM_LIMIT=21474836480</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Project namespace (defaults to the current folder name if not set)</span></span><br><span class="line">COMPOSE_PROJECT_NAME=docker-es-cluster</span><br></pre></td></tr></table></figure>
+
+<p>docker-compose.yml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&quot;2.2&quot;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  setup:</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">    user: <span class="string">&quot;0&quot;</span></span><br><span class="line">    <span class="built_in">command</span>: &gt;</span><br><span class="line">      bash -c <span class="string">&#x27;</span></span><br><span class="line"><span class="string">        if [ x$&#123;ELASTIC_PASSWORD&#125; == x ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Set the ELASTIC_PASSWORD environment variable in the .env file&quot;;</span></span><br><span class="line"><span class="string">          exit 1;</span></span><br><span class="line"><span class="string">        elif [ x$&#123;KIBANA_PASSWORD&#125; == x ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Set the KIBANA_PASSWORD environment variable in the .env file&quot;;</span></span><br><span class="line"><span class="string">          exit 1;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        if [ ! -f config/certs/ca.zip ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Creating CA&quot;;</span></span><br><span class="line"><span class="string">          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;</span></span><br><span class="line"><span class="string">          unzip config/certs/ca.zip -d config/certs;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        if [ ! -f config/certs/certs.zip ]; then</span></span><br><span class="line"><span class="string">          echo &quot;Creating certs&quot;;</span></span><br><span class="line"><span class="string">          echo -ne \</span></span><br><span class="line"><span class="string">          &quot;instances:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es01\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es01\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es02\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es02\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;  - name: es03\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    dns:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - es03\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - localhost\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;    ip:\n&quot;\</span></span><br><span class="line"><span class="string">          &quot;      - 127.0.0.1\n&quot;\</span></span><br><span class="line"><span class="string">          &gt; config/certs/instances.yml;</span></span><br><span class="line"><span class="string">          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;</span></span><br><span class="line"><span class="string">          unzip config/certs/certs.zip -d config/certs;</span></span><br><span class="line"><span class="string">        fi;</span></span><br><span class="line"><span class="string">        echo &quot;Setting file permissions&quot;</span></span><br><span class="line"><span class="string">        chown -R root:root config/certs;</span></span><br><span class="line"><span class="string">        find . -type d -exec chmod 750 \&#123;\&#125; \;;</span></span><br><span class="line"><span class="string">        find . -type f -exec chmod 640 \&#123;\&#125; \;;</span></span><br><span class="line"><span class="string">        echo &quot;Waiting for Elasticsearch availability&quot;;</span></span><br><span class="line"><span class="string">        until curl -s --cacert config/certs/ca/ca.crt https://es01:9200 | grep -q &quot;missing authentication credentials&quot;; do sleep 30; done;</span></span><br><span class="line"><span class="string">        echo &quot;Setting kibana_system password&quot;;</span></span><br><span class="line"><span class="string">        until curl -s -X POST --cacert config/certs/ca/ca.crt -u &quot;elastic:$&#123;ELASTIC_PASSWORD&#125;&quot; -H &quot;Content-Type: application/json&quot; https://es01:9200/_security/user/kibana_system/_password -d &quot;&#123;\&quot;password\&quot;:\&quot;$&#123;KIBANA_PASSWORD&#125;\&quot;&#125;&quot; | grep -q &quot;^&#123;&#125;&quot;; do sleep 10; done;</span></span><br><span class="line"><span class="string">        echo &quot;All done!&quot;;</span></span><br><span class="line"><span class="string">      &#x27;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>: [<span class="string">&quot;CMD-SHELL&quot;</span>, <span class="string">&quot;[ -f config/certs/es01/es01.crt ]&quot;</span>]</span><br><span class="line">      interval: 1s</span><br><span class="line">      <span class="built_in">timeout</span>: 5s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es01:</span><br><span class="line">    depends_on:</span><br><span class="line">      setup:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es01/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es01/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es01/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">    ports:</span><br><span class="line">      - 9200:9200</span><br><span class="line">      - 9300:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es01</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es02,es03</span><br><span class="line">      - ELASTIC_PASSWORD=<span class="variable">$&#123;ELASTIC_PASSWORD&#125;</span></span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es01/es01.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es01/es01.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es01/es01.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es01/es01.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es02:</span><br><span class="line">    depends_on:</span><br><span class="line">      - es01</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es02/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es02/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es02/plugins:/usr/share/elasticsearch/plugins      </span><br><span class="line">    ports:</span><br><span class="line">      - 9201:9200     </span><br><span class="line">      - 9301:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es02</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es01,es03</span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es02/es02.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es02/es02.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es02/es02.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es02/es02.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  es03:</span><br><span class="line">    depends_on:</span><br><span class="line">      - es02</span><br><span class="line">    image: arm64v8/elasticsearch:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/elasticsearch/config/certs</span><br><span class="line">      - ./es03/data:/usr/share/elasticsearch/data</span><br><span class="line">      - ./es03/logs:/usr/share/elasticsearch/logs</span><br><span class="line">      - ./es03/plugins:/usr/share/elasticsearch/plugins</span><br><span class="line">    ports:</span><br><span class="line">      - 9202:9200     </span><br><span class="line">      - 9302:9300</span><br><span class="line">    environment:</span><br><span class="line">      - node.name=es03</span><br><span class="line">      - cluster.name=<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">      - cluster.initial_master_nodes=es01,es02,es03</span><br><span class="line">      - discovery.seed_hosts=es01,es02</span><br><span class="line">      - <span class="string">&quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span></span><br><span class="line">      - bootstrap.memory_lock=<span class="literal">false</span></span><br><span class="line">      - xpack.security.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.http.ssl.key=certs/es03/es03.key</span><br><span class="line">      - xpack.security.http.ssl.certificate=certs/es03/es03.crt</span><br><span class="line">      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.http.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.security.transport.ssl.enabled=<span class="literal">true</span></span><br><span class="line">      - xpack.security.transport.ssl.key=certs/es03/es03.key</span><br><span class="line">      - xpack.security.transport.ssl.certificate=certs/es03/es03.crt</span><br><span class="line">      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt</span><br><span class="line">      - xpack.security.transport.ssl.verification_mode=certificate</span><br><span class="line">      - xpack.license.self_generated.type=<span class="variable">$&#123;LICENSE&#125;</span></span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q &#x27;missing authentication credentials&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120</span><br><span class="line"></span><br><span class="line">  kibana:</span><br><span class="line">    depends_on:</span><br><span class="line">      es01:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">      es02:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">      es03:</span><br><span class="line">        condition: service_healthy</span><br><span class="line">    image: arm64v8/kibana:<span class="variable">$&#123;STACK_VERSION&#125;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/certs:/usr/share/kibana/config/certs</span><br><span class="line">      - ./kibana/data:/usr/share/kibana/data</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="variable">$&#123;KIBANA_PORT&#125;</span>:5601</span><br><span class="line">    environment:</span><br><span class="line">      - SERVERNAME=kibana</span><br><span class="line">      - ELASTICSEARCH_HOSTS=https://es01:9200</span><br><span class="line">      - ELASTICSEARCH_USERNAME=kibana_system</span><br><span class="line">      - ELASTICSEARCH_PASSWORD=<span class="variable">$&#123;KIBANA_PASSWORD&#125;</span></span><br><span class="line">      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt</span><br><span class="line">    mem_limit: <span class="variable">$&#123;MEM_LIMIT&#125;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      <span class="built_in">test</span>:</span><br><span class="line">        [</span><br><span class="line">          <span class="string">&quot;CMD-SHELL&quot;</span>,</span><br><span class="line">          <span class="string">&quot;curl -s -I http://localhost:5601 | grep -q &#x27;HTTP/1.1 302 Found&#x27;&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line">      interval: 10s</span><br><span class="line">      <span class="built_in">timeout</span>: 10s</span><br><span class="line">      retries: 120    </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+        <tag>docker</tag>
+        <tag>lima</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES写入和查询流程</title>
+    <url>/ES%E5%86%99%E5%85%A5%E5%92%8C%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>wechat和chatgpt打造chatRobot</title>
+    <url>/wechat%E5%92%8Cchatgpt%E6%89%93%E9%80%A0chatRobot/</url>
+    <content><![CDATA[<h2 id="三个工具"><a href="#三个工具" class="headerlink" title="三个工具"></a>三个工具</h2><h3 id="wechaty-rpa-chatbot"><a href="#wechaty-rpa-chatbot" class="headerlink" title="wechaty : rpa chatbot"></a>wechaty : rpa chatbot</h3><p><a href="https://github.com/wechaty/wechaty#readme">https://github.com/wechaty/wechaty#readme</a></p>
+<h3 id="chatgpt：一个由openai训练对大型语音模型"><a href="#chatgpt：一个由openai训练对大型语音模型" class="headerlink" title="chatgpt：一个由openai训练对大型语音模型"></a>chatgpt：一个由openai训练对大型语音模型</h3><p>登录地址：<a href="https://chat.openai.com/auth/login">https://chat.openai.com/auth/login</a></p>
+<p>注册openai教程：</p>
+<p><a href="https://zblogs.top/how-to-register-openai-chatgpt-in-china/">https://zblogs.top/how-to-register-openai-chatgpt-in-china/</a></p>
+<p><a href="https://mirror.xyz/boxchen.eth/9O9CSqyKDj4BKUIil7NC1Sa1LJM-3hsPqaeW_QjfFBc">https://mirror.xyz/boxchen.eth/9O9CSqyKDj4BKUIil7NC1Sa1LJM-3hsPqaeW_QjfFBc</a></p>
+<p>手机号获取网站：<a href="https://sms-activate.org/cn/getNumber">https://sms-activate.org/cn/getNumber</a></p>
+<h3 id="railway：免费部署应用"><a href="#railway：免费部署应用" class="headerlink" title="railway：免费部署应用"></a>railway：免费部署应用</h3><p><a href="https://railway.app/new">https://railway.app/new</a></p>
+<p>github账号登录</p>
+<h3 id="开源工具："><a href="#开源工具：" class="headerlink" title="开源工具："></a>开源工具：</h3><p><a href="https://github.com/fuergaosi233/wechat-chatgpt">https://github.com/fuergaosi233/wechat-chatgpt</a></p>
+<p>docker run -d –name wechat-chatgpt  holegots&#x2F;wechat-chatgpt:latest</p>
+<p>docker run -d –name wechat-chatgpt -v .&#x2F;config.yaml:&#x2F;app&#x2F;config.yaml  holegots&#x2F;wechat-chatgpt:latest</p>
+<p>docker run -d –name wechat-chatgpt -v $(pwd)&#x2F;config.yaml:&#x2F;app&#x2F;config.yaml -v $(pwd)&#x2F;wechat-assistant.memory-card.json:&#x2F;app&#x2F;wechat-assistant.memory-card.json holegots&#x2F;wechat-chatgpt:latest</p>
+]]></content>
+      <categories>
+        <category>ai</category>
+      </categories>
+      <tags>
+        <tag>wechat,chatgpt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES涉及的算法</title>
+    <url>/ES%E6%B6%89%E5%8F%8A%E7%9A%84%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="一、查询算法"><a href="#一、查询算法" class="headerlink" title="一、查询算法"></a>一、查询算法</h1><p>1、排序</p>
+<p>2、模糊搜索</p>
+<p>3、向量检索</p>
+<h1 id="二、写入算法"><a href="#二、写入算法" class="headerlink" title="二、写入算法"></a>二、写入算法</h1><h1 id="三、存储算法"><a href="#三、存储算法" class="headerlink" title="三、存储算法"></a>三、存储算法</h1><h1 id="四、不同算法在其他场景的应用"><a href="#四、不同算法在其他场景的应用" class="headerlink" title="四、不同算法在其他场景的应用"></a>四、不同算法在其他场景的应用</h1>]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>elasticsearch之java api client</title>
+    <url>/elasticsearch%E4%B9%8Bjava%20api%20client/</url>
+    <content><![CDATA[<p>Elasticsearch client有3种客户端，分别为TransportClient、HighLevelRestClient、javaApiClient。</p>
+<p>TransportClient自elasticsearch第一次提交一来就存在。TransportClient是一个特殊的客户端，采用传输层协议TCP进行通信，如果客户端版本与elasticsearch版本一致，就会出现兼容性问题。TransportClient在elasticsearch8.x版本中被移除。</p>
+<p>HighLevelRestClient基于LowLevelRestClient，在2016年发布。LowLevelRestClient与所有版本的ES兼容，通过http与ES集群进行通信。restClient始于5.6版本，在7.15版本之后被弃用，转而替代的是java api client。</p>
+<h3 id="JavaApiClient"><a href="#JavaApiClient" class="headerlink" title="JavaApiClient"></a>JavaApiClient</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><h4 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Create the low-level client</span></span><br><span class="line"><span class="type">RestClient</span> <span class="variable">restClient</span> <span class="operator">=</span> RestClient.builder(</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">HttpHost</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">9200</span>)).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create the transport with a Jackson mapper</span></span><br><span class="line"><span class="type">ElasticsearchTransport</span> <span class="variable">transport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestClientTransport</span>(</span><br><span class="line">  restClient, <span class="keyword">new</span> <span class="title class_">JacksonJsonpMapper</span>());</span><br><span class="line"></span><br><span class="line"><span class="comment">// And create the API client</span></span><br><span class="line">client = <span class="keyword">new</span> <span class="title class_">ElasticsearchClient</span>(transport);</span><br></pre></td></tr></table></figure>
+
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>http协议和传输层协议相比性能如何，<a href="https://www.elastic.co/cn/blog/state-of-the-official-elasticsearch-java-clients">官方博文解释</a> 性能相近。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><h3 id="HighLevelRestClient迁移到JavaApiClient"><a href="#HighLevelRestClient迁移到JavaApiClient" class="headerlink" title="HighLevelRestClient迁移到JavaApiClient"></a>HighLevelRestClient迁移到JavaApiClient</h3><p>参考文档：<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/7.16/migrate-hlrc.html">https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/7.16/migrate-hlrc.html</a></p>
+<h3 id="TransportClient迁移到HighLevelRestClient"><a href="#TransportClient迁移到HighLevelRestClient" class="headerlink" title="TransportClient迁移到HighLevelRestClient"></a>TransportClient迁移到HighLevelRestClient</h3><p>参考文档：<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.15/java-rest-high-level-migration.html">https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.15/java-rest-high-level-migration.html</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>TransportClient跟随elasticsearch版本</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/index.html">https://www.elastic.co/guide/en/elasticsearch/client/java-api/index.html</a></p>
+<p>TransportClient迁移到HighLevelRestClient原因博文</p>
+<p><a href="https://www.elastic.co/cn/blog/state-of-the-official-elasticsearch-java-clients">https://www.elastic.co/cn/blog/state-of-the-official-elasticsearch-java-clients</a></p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>elasticsearch之配置参数</title>
+    <url>/elasticsearch%E4%B9%8B%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[<p>被移除的字段</p>
+<p>_all 7.0 &#x3D;&#x3D;&gt;copy_to</p>
+<p>Index(type)  6.0</p>
+<h3 id="Dydamic-mapping"><a href="#Dydamic-mapping" class="headerlink" title="Dydamic mapping"></a>Dydamic mapping</h3><p>可以根据参数，是否对mapping新增字段自动映射数据类型</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>通过正排索引 id+字段，两种存储方法：</p>
+<p>fielddata（内存）</p>
+<p>doc_value（磁盘） 用于排序和聚合</p>
+<h3 id="version-乐观锁并发控制"><a href="#version-乐观锁并发控制" class="headerlink" title="version 乐观锁并发控制"></a>version 乐观锁并发控制</h3><p>内部版本控制，字段_version被废除，采用 if_seq_no+if_primary_term</p>
+<p>外部版本控制，字段_version</p>
+<h3 id="索引生命周期管理（index-lifecyle-manage）"><a href="#索引生命周期管理（index-lifecyle-manage）" class="headerlink" title="索引生命周期管理（index lifecyle manage）"></a>索引生命周期管理（index lifecyle manage）</h3><p>关键api：</p>
+<p>缩小分片：shrink（满足条件：索引只读、原索引分片在一个节点、缩小后到分片数可被原分片个数正整除）</p>
+<p>扩大分片：split（满足条件：索引只读、扩大后到索引分片数是原分片数到倍数）</p>
+<p>扩建索引：rollover（通过 alias设置条件：索引文档数量、索引文档大小、索引时间）</p>
+<p>hot-&gt;warm-&gt;cold-&gt;delete</p>
+<h3 id="集群架构"><a href="#集群架构" class="headerlink" title="集群架构"></a>集群架构</h3><p>master node;   data node; ingest node</p>
+<p>curl -X PUT “localhost:9200&#x2F;nori_sample?pretty” -H ‘Content-Type: application&#x2F;json’ -d’<br>{<br>    “settings”: {<br>        “index”:{<br>            “analysis”:{<br>                “analyzer” : {<br>                    “my_analyzer” : {<br>                        “tokenizer” : “nori_tokenizer”,<br>                        “filter” : [“nori_readingform”]<br>                    }<br>                }<br>            }<br>        }<br>    }<br>}<br>‘<br>curl -X GET “localhost:9200&#x2F;nori_sample&#x2F;_analyze?pretty” -H ‘Content-Type: application&#x2F;json’ -d’<br>{<br>  “analyzer”: “my_analyzer”,<br>  “text”: “鄕歌”<br>}<br>‘</p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>elasticsearch相关文档</title>
+    <url>/elasticsearch%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>英文版</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.5/elasticsearch-intro.html">https://www.elastic.co/guide/en/elasticsearch/reference/8.5/elasticsearch-intro.html</a></p>
+<p>中文版</p>
+<p>基于2.x版本</p>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html</a></p>
+<h3 id="java-api"><a href="#java-api" class="headerlink" title="java-api"></a>java-api</h3><p>8.5</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/current/index.html">https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/current/index.html</a></p>
+<p>7.17</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/index.html">https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/index.html</a></p>
+<h3 id="elastic社区"><a href="#elastic社区" class="headerlink" title="elastic社区"></a>elastic社区</h3><p><a href="https://discuss.elastic.co/">https://discuss.elastic.co</a></p>
+<h3 id="Elastic-中国社区官方博客"><a href="#Elastic-中国社区官方博客" class="headerlink" title="Elastic 中国社区官方博客"></a>Elastic 中国社区官方博客</h3><p><a href="https://elasticstack.blog.csdn.net/?type=blog">https://elasticstack.blog.csdn.net/?type=blog</a></p>
+]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux常用命令</title>
+    <url>/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>linux常用命令介绍：<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html</a></p>
+<h3 id="查看文件夹或者文件大小"><a href="#查看文件夹或者文件大小" class="headerlink" title="查看文件夹或者文件大小"></a>查看文件夹或者文件大小</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看当前目录文件夹大小</span></span><br><span class="line">$ <span class="built_in">du</span> -h --max-depth=1</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h3><h4 id="本地拷贝"><a href="#本地拷贝" class="headerlink" title="本地拷贝"></a>本地拷贝</h4><h4 id="远程拷贝"><a href="#远程拷贝" class="headerlink" title="远程拷贝"></a>远程拷贝</h4><p>Linux scp命令用于Linux之间复制文件和目录。scp是secure copy 的缩写, scp是 linux 系统下基于ssh登陆进行安全的远程文件拷贝命令。</p>
+<p><strong>linux scp命令的用法案例</strong></p>
+<p>(1)从本地拷贝文件到远程服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp /usr/share/docker/es7.12/docker-compose.yml  koaladoc@192.168.50.32:/usr/share/docker</span><br></pre></td></tr></table></figure>
+
+<p>(2)从远程服务器拷贝文件到本地</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#复制远程文件到本地</span></span><br><span class="line">$ scp koaladoc@192.168.50.32:/usr/share/docker/docker-compose.yml  /usr/share/docker/es7.12</span><br><span class="line"></span><br><span class="line"><span class="comment">#复制远程目录到本地文件夹/usr/share/docker  -r 表示递归复制整个目录</span></span><br><span class="line">$ scp -r koaladoc@192.168.50.32:/usr/share/docker/es7.12/  /usr/share/docker</span><br></pre></td></tr></table></figure>
+
+<p>常用命令参数：</p>
+<ul>
+<li>-r 递归复制整个目录</li>
+<li>-P port 注意是大写的P, port是指定数据传输用到的端口号</li>
+</ul>
+<h3 id="ssh远程登录"><a href="#ssh远程登录" class="headerlink" title="ssh远程登录"></a>ssh远程登录</h3><p>ssh <a href="mailto:&#x6b;&#111;&#97;&#108;&#97;&#x64;&#x6f;&#x63;&#64;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#56;&#x2e;&#53;&#x30;&#46;&#56;&#x39;">&#x6b;&#111;&#97;&#108;&#97;&#x64;&#x6f;&#x63;&#64;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#56;&#x2e;&#53;&#x30;&#46;&#56;&#x39;</a> -p 22</p>
+<p>koaladoc是用户名，回车之后输入密码登录访问</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux概念</title>
+    <url>/linux%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向<a href="https://zh.wikipedia.org/wiki/%E5%86%85%E6%A0%B8">内核</a>为每一个<a href="https://zh.wikipedia.org/wiki/%E8%BF%9B%E7%A8%8B">进程</a>所维护的该进程打开文件的记录表。Linux 系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行I&#x2F;O操作的系统调用都会通过文件描述符。</p>
+<p>查看和设置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看文件描述符限制，默认是1024</span></span><br><span class="line">$ <span class="built_in">ulimit</span> -n</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改文件描述符</span></span><br><span class="line"><span class="comment">#临时修改，仅在当前session生效</span></span><br><span class="line">$ sudo su  </span><br><span class="line">$ <span class="built_in">ulimit</span> -n 65535 </span><br><span class="line">$ su yanhangr</span><br><span class="line"></span><br><span class="line"><span class="comment">#永久生效</span></span><br><span class="line">$ vi /etc/security/limits.conf</span><br><span class="line"><span class="comment">#添加行,设置最大描述符65535，yanhangr表示用户名</span></span><br><span class="line">yanhangr  -  nofile  65535</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>基于本地知识库到llm</title>
+    <url>/%E5%9F%BA%E4%BA%8E%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84llm/</url>
+    <content><![CDATA[<p>开源代码</p>
+<p><a href="https://github.com/imClumsyPanda/langchain-ChatGLM">https://github.com/imClumsyPanda/langchain-ChatGLM</a></p>
+<p>代码分析：</p>
+<p>langchain+llm</p>
+<p>langchain介绍材料</p>
+<p><a href="https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide">https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide</a></p>
+<p>gpu模型– 按小时计费</p>
+<p><a href="https://www.codewithgpu.com/i/imClumsyPanda/langchain-ChatGLM/langchain-ChatGLM">https://www.codewithgpu.com/i/imClumsyPanda/langchain-ChatGLM/langchain-ChatGLM</a></p>
+<p>启动模型</p>
+<p><code>$  cd /root/langchain-ChatGLM/ $  conda activate /root/pyenv </code></p>
+<p><code>$ python webui.py</code></p>
+]]></content>
+      <categories>
+        <category>ai</category>
+      </categories>
+      <tags>
+        <tag>llm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac搭建python环境</title>
+    <url>/mac%E6%90%AD%E5%BB%BApython%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>本文安装采用homebrew来管理mac软件，homebrew的安装请参考mac软件安装篇</p>
+<h2 id="安装anaconda"><a href="#安装anaconda" class="headerlink" title="安装anaconda"></a>安装anaconda</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install anaconda</span><br><span class="line"><span class="comment">#安装完成后，设置环境变量</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;/opt/homebrew/anaconda3/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line">$ <span class="built_in">source</span> ~/.zshrc</span><br><span class="line"><span class="comment">#启动jupyter-notebook</span></span><br><span class="line">$ <span class="built_in">cd</span> /opt/homebrew/anaconda3/bin</span><br><span class="line">$ ./jupyter-notebook</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装pycharm"><a href="#安装pycharm" class="headerlink" title="安装pycharm"></a>安装pycharm</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install pycharm</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>conda</tag>
       </tags>
   </entry>
 </search>
